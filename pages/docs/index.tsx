@@ -1,3 +1,4 @@
+// ./pages/docs/index.tsx
 import Layout from '@/components/layout';
 import { DocPage } from '@/components/DocPage';
 import { getAllDocs, Doc } from '@/lib/docs';
