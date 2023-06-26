@@ -14,9 +14,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const renderers = {
     code: ({ language, value }: any) => {
       return (
-        <SyntaxHighlighter style={solarizedlight} language={language}>
-          {value}
-        </SyntaxHighlighter>
+        <SyntaxHighlighter style={solarizedlight} language={language} children={value} />
       );
     },
   };
@@ -29,7 +27,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
             <li key={idx} className={doc === selectedDoc ? "font-semibold text-gray-800" : "text-gray-500"}>
               <Link href={doc.filePath} passHref>
                 <span className={doc === selectedDoc ? 'font-bold text-gray-800' : ''}>
-                  {doc.title || doc.filePath.split('/').pop()}
+                  {doc.data.title || doc.filePath.split('/').pop()}
                 </span>
               </Link>
             </li>
@@ -37,9 +35,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         </ul>
       </nav>
       <main className="flex-1 p-10 overflow-y-auto">
-        <ReactMarkdown renderers={renderers}>
-          {selectedDoc.content}
-        </ReactMarkdown>
+        <ReactMarkdown renderers={renderers} children={selectedDoc.content} />
       </main>
     </div>
   );
