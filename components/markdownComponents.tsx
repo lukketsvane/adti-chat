@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 const components = {
   h1: (props) => <h1 style={{ fontSize: '2em', borderBottom: '1px solid #eaecef', paddingBottom: '0.3em', paddingTop: '0.8em' }} {...props} />,
   h2: (props) => <h2 style={{ fontSize: '1.5em', borderBottom: '1px solid #eaecef', paddingBottom: '0.3em', paddingTop: '0.8em' }} {...props} />,
@@ -21,7 +19,6 @@ const components = {
     <blockquote style={{ color: '#6a737d', borderLeft: '0.25em solid #dfe2e5', padding: '0 1em' }}>{children}</blockquote>
   ),
   hr: () => <hr />,
-  img: ({ src, alt }) => <Image src={src} alt={alt} layout="responsive" className="max-w-full" />,
 };
 
 export default components;

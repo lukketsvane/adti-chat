@@ -15,8 +15,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
-    const file = doc.filePath.split('/').pop();
-    const displayTitle = removeNumberPrefix(file);
+    const displayTitle = removeNumberPrefix(doc.data.title || doc.filePath.split('/').pop());
 
     return (
       <li
@@ -36,8 +35,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   const docsByFolder: Record<string, Doc[]> = docs.reduce((acc, doc) => {
     const parts = doc.filePath.split('/');
-    const file = parts.pop();
-    const folder = parts.join('/');
+    const folder = parts.slice(0, -1).join('/');
     acc[folder] = [...(acc[folder] || []), doc];
     return acc;
   }, {});
@@ -54,7 +52,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   const removeNumberPrefix = (title: string): string => {
-    return title.replace(/^\d+\.\d+ |^\d+ /, '');
+    return title.replace(/^\d+(\.\d+)? /, '');
   };
 
   return (
