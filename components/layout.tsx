@@ -1,4 +1,3 @@
-// layout.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -25,7 +24,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="mx-auto flex flex-col space-y-4">
       <header className="sticky top-0 z-40 bg-white">
-        <div className="h-16 border-b border-gray-200 py-4 px-6">
+        <div className="h-16 border-b border-b-slate-200 py-4 px-6">
           <nav className="flex items-center justify-between space-x-4">
             <div className="flex items-center space-x-4">
               <Link href="/" passHref>
@@ -35,18 +34,18 @@ export default function Layout({ children }: LayoutProps) {
               </Link>
               <div className="hidden md:flex items-center space-x-4">
                 <Link href="/docs" passHref>
-                  <span className="hover:text-blue-600 cursor-pointer">Docs</span>
+                  <span className="hover:text-slate-600 cursor-pointer">Docs</span>
                 </Link>
                 <Link href="/page2" passHref>
-                  <span className="hover:text-blue-600 cursor-pointer">GitHub</span>
+                  <span className="hover:text-slate-600 cursor-pointer">GitHub</span>
                 </Link>
                 <Link href="/page3" passHref>
-                  <span className="hover:text-blue-600 cursor-pointer">Page 3</span>
+                  <span className="hover:text-slate-600 cursor-pointer">Page 3</span>
                 </Link>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <input type="search" placeholder="Search..." className="border-2 border-gray-300 rounded px-2" />
+              <input type="search" placeholder="Search..." className="border-2 border-slate-300 rounded px-2" />
               <div className="md:hidden">
                 <button
                   className="text-gray-500 hover:text-gray-800 focus:outline-none"
