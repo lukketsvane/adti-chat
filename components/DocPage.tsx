@@ -78,7 +78,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           isSidebarOpen ? 'w-full' : ''
         } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
       >
-        <div className="relative z-50 pr-3 md:hidden flex items-center justify-end ml-6 py-2">
+        <div className="pr-3 md:hidden flex items-center justify-end ml-6 py-2">
           <button
             className="text-gray-500 hover:text-gray-800 focus:outline-none"
             onClick={toggleSidebar}
