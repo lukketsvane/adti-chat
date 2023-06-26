@@ -67,7 +67,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
       <nav
-        className={`w-0 md:w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4 ${
+        className={`w-0 md:w-64 bg-white border-r overflow-auto px-4 ${
           isSidebarOpen ? 'w-64' : ''
         } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
       >
