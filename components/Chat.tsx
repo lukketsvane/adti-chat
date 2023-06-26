@@ -40,7 +40,7 @@ export default function Chat({ onClose }: { onClose: () => void }) {
     textAreaRef.current?.focus();
   }, []);
 
-  // handle form submission
+  //handle form submission
   async function handleSubmit(e: any) {
     e.preventDefault();
 
@@ -99,7 +99,7 @@ export default function Chat({ onClose }: { onClose: () => void }) {
 
       setLoading(false);
 
-      // scroll to bottom
+      //scroll to bottom
       messageListRef.current?.scrollTo(0, messageListRef.current.scrollHeight);
     } catch (error) {
       setLoading(false);
@@ -107,11 +107,11 @@ export default function Chat({ onClose }: { onClose: () => void }) {
     }
   }
 
-  // prevent empty submissions
+  //prevent empty submissions
   const handleEnter = (e: any) => {
     if (e.key === 'Enter' && query) {
       handleSubmit(e);
-    } else if (e.key === 'Enter') {
+    } else if (e.key == 'Enter') {
       e.preventDefault();
     }
   };
@@ -119,35 +119,12 @@ export default function Chat({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed bottom-2 right-2 w-1/4 h-3/5 bg-white shadow-xl flex flex-col p-4 rounded">
       <div className="flex justify-between items-center">
-        <button className="text-xl text-gray-200 rounded-full" onClick={onClose}>
-          X
-        </button>
+        <button className="text-xl text-gray-200 rounded-full" onClick={onClose}>X</button>
       </div>
       <div className="flex-1 mt-2 overflow-y-auto" ref={messageListRef}>
         {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`p-2 rounded ${
-              message.type === 'userMessage' ? 'bg-blue-100' : 'bg-gray-100'
-            } my-2`}
-          >
+          <div key={index} className={`p-2 rounded ${message.type === 'userMessage' ? 'bg-blue-100' : 'bg-gray-100'} my-2`}>
             <ReactMarkdown>{message.message}</ReactMarkdown>
-            {message.sourceDocs && (
-              <Accordion type="single" collapsible className="flex-col">
-                {message.sourceDocs.map((doc, index) => (
-                  <AccordionItem key={`messageSourceDocs-${index}`} value={`item-${index}`}>
-                    <AccordionTrigger>
-                      <h3 className="sr-only">Source {index + 1}</h3>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ReactMarkdown linkTarget="_blank">
-                        {doc.pageContent}
-                      </ReactMarkdown>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            )}
           </div>
         ))}
         {error && (
