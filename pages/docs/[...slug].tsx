@@ -1,4 +1,4 @@
-import { GetStaticPropsContext, GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSidePropsContext, GetServerSideProps } from 'next';
 import { getAllDocs, getDocBySlug, Doc } from '@/lib/docs';
 import { DocPage } from '@/components/DocPage';
 import Layout from '@/components/layout';
@@ -16,15 +16,7 @@ export default function Docs({ selectedDoc, docs }: DocsProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const docs = getAllDocs();
-  return {
-    paths: docs.map((doc) => doc.filePath),
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<DocsProps> = async ({ params }: GetStaticPropsContext) => {
+export const getServerSideProps: GetServerSideProps<DocsProps> = async ({ params }: GetServerSidePropsContext) => {
   const slug = params?.slug as string[];
   const selectedDoc = await getDocBySlug(slug);
   const docs = await getAllDocs();

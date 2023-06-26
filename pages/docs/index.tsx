@@ -1,7 +1,7 @@
 import Layout from '@/components/layout';
 import { DocPage } from '@/components/DocPage';
 import { getAllDocs, Doc } from '@/lib/docs';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 type DocsIndexProps = {
   docs: Doc[];
@@ -13,9 +13,9 @@ export default function DocsIndex({ docs }: DocsIndexProps) {
       <DocPage docs={docs} selectedDoc={docs[0]} />
     </Layout>
   );
-};
+}
 
-export const getStaticProps: GetStaticProps<DocsIndexProps> = async () => {
+export const getServerSideProps: GetServerSideProps<DocsIndexProps> = async () => {
   const docs = getAllDocs();
   return { props: { docs } };
 };
