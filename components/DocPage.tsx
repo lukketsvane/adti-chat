@@ -4,7 +4,6 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import markdownComponents from './markdownComponents';
-import { FiMenu } from 'react-icons/fi';
 
 type DocPageProps = {
   docs: Doc[];
@@ -13,7 +12,6 @@ type DocPageProps = {
 
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
@@ -57,24 +55,11 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     return title.replace(/^\d+(\.\d+)? /, '');
   };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
   const sortedFolders = Object.keys(docsByFolder).sort();
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <nav className={`w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="flex justify-between items-center py-4 px-2">
-          <button
-            className="text-gray-500 hover:text-gray-800 focus:outline-none"
-            onClick={toggleSidebar}
-          >
-            <FiMenu size={24} />
-          </button>
-          <span className="text-lg font-semibold">Menu</span>
-        </div>
+      <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
         {sortedFolders.map((folder) => {
           const folderTitle = folder.split('/').pop();
           const displayFolderTitle = removeNumberPrefix(folderTitle);
