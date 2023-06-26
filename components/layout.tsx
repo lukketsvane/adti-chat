@@ -1,10 +1,8 @@
-// components/layout.tsx
-
-import { useCallback, useState, ChangeEvent } from 'react';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 import Chat from '@/components/Chat';
 
 interface LayoutProps {
@@ -14,7 +12,6 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const [showChat, setShowChat] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
-  const [searchText, setSearchText] = useState<string>('');
   const router = useRouter();
 
   const toggleMobileMenu = () => {
@@ -28,22 +25,6 @@ export default function Layout({ children }: LayoutProps) {
   const toggleChat = () => {
     setShowChat(!showChat);
   };
-
-  const handleSearch = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setSearchText(event.target.value);
-    },
-    [setSearchText]
-  );
-
-  const handleSearchKeyPress = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === 'Enter' && searchText) {
-        router.push(`/search?q=${encodeURIComponent(searchText)}`);
-      }
-    },
-    [searchText, router]
-  );
 
   return (
     <div className="mx-auto flex flex-col space-y-4">
@@ -69,14 +50,7 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <input
-                type="search"
-                placeholder="Search..."
-                className="border-2 border-slate-300 rounded px-2"
-                value={searchText}
-                onChange={handleSearch}
-                onKeyPress={handleSearchKeyPress}
-              />
+              <input type="search" placeholder="Search..." className="border-2 border-slate-300 rounded px-2" />
               <div className="md:hidden">
                 <button
                   className="text-gray-500 hover:text-gray-800 focus:outline-none"
