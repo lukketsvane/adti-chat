@@ -1,4 +1,3 @@
-// ./pages/docs/[...slug].tsx
 import { GetStaticPropsContext, GetStaticPaths, GetStaticProps } from 'next';
 import { getAllDocs, getDocBySlug, Doc } from '@/lib/docs';
 import { DocPage } from '@/components/DocPage';
@@ -18,7 +17,7 @@ export default function Docs({ selectedDoc, docs }: DocsProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const docs = await getAllDocs();
+  const docs = getAllDocs();
   return {
     paths: docs.map((doc) => doc.filePath),
     fallback: false,
