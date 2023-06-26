@@ -11,12 +11,19 @@ export type Doc = {
 };
 
 export function getDocBySlug(slug: string[]): Promise<Doc> {
-  const fullPath = path.join(docsDirectory, `${slug.join('/')}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
+  return new Promise((resolve, reject) => {
+    const fullPath = path.join(docsDirectory, `${slug.join('/')}.md`);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
 
-  return { data, content, filePath: `/docs/${slug.join('/')}` };
+    if (data && content) {
+      resolve({ data, content, filePath: `/docs/${slug.join('/')}` });
+    } else {
+      reject('Failed to read data and content');
+    }
+  });
 }
+
 
 export function getAllDocs(): Doc[] {
   function getFiles(dirPath: string, arrayOfFiles: string[] = []): string[] {
