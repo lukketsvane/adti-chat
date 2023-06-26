@@ -5,7 +5,7 @@ const components = {
   code({ node, inline, className, children, ...props }) {
     const match = /language-(\w+)/.exec(className || '')
     return !inline && match ? (
-      <SyntaxHighlighter language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+      <SyntaxHighlighter language={match[1]} PreTag="div">{String(children).replace(/\n$/, '')}</SyntaxHighlighter>
     ) : (
       <code className={className} {...props}>
         {children}
@@ -30,7 +30,7 @@ const components = {
   td: (props) => <td style={{ border: "1px solid #dfe2e5", padding: "6px 13px" }} {...props} />,
   blockquote: ({ children }) => <blockquote style={{ color: '#6a737d', borderLeft: '0.25em solid #dfe2e5', padding: '0 1em' }}>{children}</blockquote>,
   hr: () => <hr />,
-  img: (props) => <Image className={`markdown-img ${props.className}`} {...props} />
+  img: ({ alt = '', ...props }) => <Image alt={alt} className={`markdown-img ${props.className}`} {...props} />
 }
 
 export default components;
