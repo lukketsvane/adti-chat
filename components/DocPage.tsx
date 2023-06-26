@@ -1,10 +1,12 @@
 // components/DocPage.tsx
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import markdownComponents from './markdownComponents';
+import { FiMenu } from 'react-icons/fi';
 
 type DocPageProps = {
   docs: Doc[];
@@ -13,25 +15,12 @@ type DocPageProps = {
 
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize(); // Initial check
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
-    const displayTitle = removeNumberPrefix(
-      doc.data.title || doc.filePath.split('/').pop()
-    );
+    const displayTitle = removeNumberPrefix(doc.data.title || doc.filePath.split('/').pop());
 
     return (
       <li
@@ -40,10 +29,8 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           isSelected ? 'font-semibold text-gray-800' : 'text-gray-500'
         } user-select-none`}
       >
-        <Link href={doc.filePath.replace(/ /g, '-')} passHref>
-          <span className={isSelected ? 'font-bold text-gray-800' : ''}>
-            {displayTitle}
-          </span>
+        <Link href={doc.filePath} passHref>
+          <a className={isSelected ? 'font-bold text-gray-800' : ''}>{displayTitle}</a>
         </Link>
       </li>
     );
@@ -68,47 +55,72 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   const removeNumberPrefix = (title: string): string => {
-    return title.replace(/^\d+(\.\d+)?(-)? /, '').replace(/-/g, ' ');
+    return title.replace(/^\d+(\.\d+)? /, '');
   };
 
   const sortedFolders = Object.keys(docsByFolder).sort();
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  useEffect(() => {
+    setIsSidebarOpen(false); // Close the sidebar when the selectedDoc changes
+  }, [selectedDoc]);
+
+  useEffect(() => {
+    setIsSidebarOpen(false); // Close the sidebar when the route changes
+  }, [router.asPath]);
+
+  const isMobile = window.innerWidth <= 768;
+
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen">
+      {/* Sidebar */}
       {!isMobile && (
-        <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
-          {sortedFolders.map((folder) => {
-            const folderTitle = folder.split('/').pop();
-            const displayFolderTitle = removeNumberPrefix(folderTitle);
-            return (
-              <div
-                key={folder}
-                className="transition-all duration-500 user-select-none"
-              >
-                <div
-                  className={`${
-                    selectedDoc.filePath.includes(folder)
-                      ? 'font-semibold text-gray-800 cursor-pointer'
-                      : 'text-gray-500 cursor-pointer'
-                  }`}
-                  onClick={() => handleFolderClick(folder)}
-                >
-                  {displayFolderTitle}
+        <nav
+          className={`w-0 md:w-64 bg-white border-r overflow-auto px-4 ${
+            isSidebarOpen ? 'w-full' : ''
+          } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
+        >
+          <div className="md:hidden flex items-center justify-end py-2">
+            <button
+              className="text-gray-500 hover:text-gray-800 focus:outline-none"
+              onClick={toggleSidebar}
+            >
+              <FiMenu size={24} />
+            </button>
+          </div>
+          <div className={`md:block ${isSidebarOpen ? '' : 'hidden'}`}>
+            {sortedFolders.map((folder) => {
+              const folderTitle = folder.split('/').pop();
+              const displayFolderTitle = removeNumberPrefix(folderTitle);
+              return (
+                <div key={folder} className="user-select-none">
+                  <div
+                    className={`${
+                      selectedDoc.filePath.includes(folder)
+                        ? 'font-semibold text-gray-800 cursor-pointer'
+                        : 'text-gray-500 cursor-pointer'
+                    }`}
+                    onClick={() => handleFolderClick(folder)}
+                  >
+                    {displayFolderTitle}
+                  </div>
+                  {expandedFolders.includes(folder) && (
+                    <ul className="space-y-2 pl-2">
+                      {docsByFolder[folder].map((doc) => renderDocLink(doc, folder))}
+                    </ul>
+                  )}
                 </div>
-                {expandedFolders.includes(folder) && (
-                  <ul className="space-y-2 pl-2">
-                    {docsByFolder[folder].map((doc) =>
-                      renderDocLink(doc, folder)
-                    )}
-                  </ul>
-                )}
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </nav>
       )}
+      {/* Main Content */}
       <main className="flex-1 p-10 overflow-auto">
-        <div className="prose dark:prose-dark max-w-none overflow-scroll">
+        <div className="prose max-w-none overflow-scroll">
           <ReactMarkdown components={markdownComponents} remarkPlugins={[gfm]}>
             {selectedDoc.content}
           </ReactMarkdown>
