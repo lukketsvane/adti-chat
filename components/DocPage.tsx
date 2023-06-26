@@ -89,7 +89,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           );
         })}
       </nav>
-      <main className="flex-1 p-10 overflow-auto">
+      <main className="flex-1 p-10 pr-16 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
           <ReactMarkdown
             components={markdownComponents}
