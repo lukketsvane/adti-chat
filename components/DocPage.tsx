@@ -76,9 +76,9 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     <div className="flex h-screen">
       {/* Sidebar */}
       <nav
-        className={`w-64 bg-white border-r overflow-auto px-4 md:relative md:w-auto md:overflow-visible md:border-0 ${
-          isSidebarOpen ? 'fixed inset-0 z-50' : 'hidden md:block'
-        }`}
+        className={`w-0 md:w-64 bg-white border-r overflow-auto px-4 ${
+          isSidebarOpen ? 'w-full' : ''
+        } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
       >
         <div className="md:hidden flex items-center justify-end py-2">
           <button
@@ -88,7 +88,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
             <FiMenu size={24} />
           </button>
         </div>
-        <div className={`${isSidebarOpen ? '' : 'hidden'}`}>
+        <div className={`md:block ${isSidebarOpen ? '' : 'hidden'}`}>
           {sortedFolders.map((folder) => {
             const folderTitle = folder.split('/').pop();
             const displayFolderTitle = removeNumberPrefix(folderTitle);
