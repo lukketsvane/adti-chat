@@ -7,7 +7,7 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import markdownComponents from './markdownComponents';
-import { FiMenu } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
 type DocPageProps = {
   docs: Doc[];
@@ -28,7 +28,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         key={doc.filePath}
         className={`${
           isSelected ? 'font-semibold text-gray-800' : 'text-gray-500'
-        } user-select-none`}
+        } user-select-none text-lg md:text-base`}
       >
         <Link href={doc.filePath} passHref>
           <a className={isSelected ? 'font-bold text-gray-800' : ''}>{displayTitle}</a>
@@ -66,27 +66,26 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   useEffect(() => {
-    setIsSidebarOpen(false); // Close the sidebar when the selectedDoc changes
+    setIsSidebarOpen(false); 
   }, [selectedDoc]);
 
   useEffect(() => {
-    setIsSidebarOpen(false); // Close the sidebar when the route changes
+    setIsSidebarOpen(false); 
   }, [router.asPath]);
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
       <nav
         className={`w-0 md:w-64 bg-white border-r overflow-auto px-4 ${
           isSidebarOpen ? 'w-full' : ''
         } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
       >
-        <div className="z-50 pr-3 md:hidden flex items-center justify-end ml-6 py-2">
+        <div className="relative z-50 pr-3 md:hidden flex items-center justify-end ml-6 py-2">
           <button
-            className="z-50 text-gray-500 hover:text-gray-800 focus:outline-none"
+            className="text-gray-500 hover:text-gray-800 focus:outline-none"
             onClick={toggleSidebar}
           >
-            <FiMenu size={24} />
+            {isSidebarOpen ? <FiArrowRight size={24} /> : <FiArrowLeft size={24} />}
           </button>
         </div>
         <div className={`md:block ${isSidebarOpen ? '' : 'hidden'}`}>
@@ -102,7 +101,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
                     selectedDoc.filePath.includes(folder)
                       ? 'font-semibold text-gray-800 cursor-pointer'
                       : 'text-gray-500 cursor-pointer'
-                  }`}
+                  } text-lg md:text-base`}
                   onClick={() => handleFolderClick(folder)}
                 >
                   {isTopLevelFolder ? `${index + 1}. ${displayFolderTitle}` : displayFolderTitle}
@@ -117,7 +116,6 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           })}
         </div>
       </nav>
-      {/* Main Content */}
       <main className="flex-1 px-4 overflow-auto">
         <div className="prose max-w-none overflow-scroll">
           <ReactMarkdown components={markdownComponents} remarkPlugins={[gfm]}>
