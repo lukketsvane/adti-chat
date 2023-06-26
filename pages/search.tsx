@@ -9,7 +9,12 @@ export default function Search() {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const searchQuery = router.query.q;
+    let searchQuery = router.query.q;
+
+    // Ensure that searchQuery is a string.
+    if (Array.isArray(searchQuery)) {
+      searchQuery = searchQuery.join(' ');
+    }
 
     if (!searchQuery) {
       setSearchResults([]);
