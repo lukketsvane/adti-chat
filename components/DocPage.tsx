@@ -16,7 +16,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
     const file = doc.filePath.split('/').pop();
-    const displayTitle = file ? file.replace(/^\d+\.\d+ /, '') : '';
+    const displayTitle = file ? removeNumberPrefix(file) : '';
 
     return (
       <li
@@ -53,7 +53,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     setExpandedFolders(newExpandedFolders);
   };
 
-  const hideNumberPrefix = (title: string): string => {
+  const removeNumberPrefix = (title: string): string => {
     return title.replace(/^\d+\.\d+ /, '');
   };
 
@@ -75,7 +75,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
                 }`}
                 onClick={() => handleFolderClick(folder)}
               >
-                {hideNumberPrefix(folderTitle)}
+                {removeNumberPrefix(folderTitle)}
               </div>
               {expandedFolders.includes(folder) && (
                 <ul className="space-y-2 pl-2">
