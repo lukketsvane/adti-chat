@@ -6,24 +6,17 @@ const docsDirectory = path.join(process.cwd(), 'docs');
 
 export type Doc = {
   content: string;
-  data: matter.GrayMatterFile<string>['data'];
+  data: { [key: string]: any };
   filePath: string;
 };
 
-export function getDocBySlug(slug: string[]): Promise<Doc> {
-  return new Promise((resolve, reject) => {
-    const fullPath = path.join(docsDirectory, `${slug.join('/')}.md`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
+export function getDocBySlug(slug: string[]): Doc {
+  const fullPath = path.join(docsDirectory, `${slug.join('/')}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
 
-    if (data && content) {
-      resolve({ data, content, filePath: `/docs/${slug.join('/')}` });
-    } else {
-      reject('Failed to read data and content');
-    }
-  });
+  return { data, content, filePath: `/docs/${slug.join('/')}` };
 }
-
 
 export function getAllDocs(): Doc[] {
   function getFiles(dirPath: string, arrayOfFiles: string[] = []): string[] {
