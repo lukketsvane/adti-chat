@@ -1,8 +1,12 @@
+import { Prism as SyntaxHighlighter } from 'prism-react-renderer';
 import Image from 'next/image';
 
 const components = {
   code({ node, inline, className, children, ...props }) {
-    return (
+    const match = /language-(\w+)/.exec(className || '')
+    return !inline && match ? (
+      <SyntaxHighlighter language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+    ) : (
       <code className={className} {...props}>
         {children}
       </code>
@@ -27,7 +31,6 @@ const components = {
   blockquote: ({ children }) => <blockquote style={{ color: '#6a737d', borderLeft: '0.25em solid #dfe2e5', padding: '0 1em' }}>{children}</blockquote>,
   hr: () => <hr />,
   img: ({ alt = '', src, ...props }) => <Image alt={alt} src={src} className={`markdown-img ${props.className}`} {...props} />
-
 }
 
 export default components;
