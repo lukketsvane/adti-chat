@@ -1,3 +1,4 @@
+// components/DocPage.tsx
 import { useState } from 'react';
 import { Doc } from '@/lib/docs';
 import Link from 'next/link';
@@ -15,7 +16,9 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
-    const displayTitle = removeNumberPrefix(doc.data.title || doc.filePath.split('/').pop());
+    const displayTitle = removeNumberPrefix(
+      doc.data.title || doc.filePath.split('/').pop()
+    );
 
     return (
       <li
@@ -52,7 +55,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   const removeNumberPrefix = (title: string): string => {
-    return title.replace(/^\d+(\.\d+)?(-)? /, '');
+    return title.replace(/^\d+(\.\d+)?(-)? /, '').replace(/-/g, ' ');
   };
 
   const sortedFolders = Object.keys(docsByFolder).sort();
@@ -91,10 +94,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
       </nav>
       <main className="flex-1 p-10 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
-          <ReactMarkdown
-            components={markdownComponents}
-            remarkPlugins={[gfm]}
-          >
+          <ReactMarkdown components={markdownComponents} remarkPlugins={[gfm]}>
             {selectedDoc.content}
           </ReactMarkdown>
         </div>
