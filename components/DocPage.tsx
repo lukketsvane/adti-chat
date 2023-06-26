@@ -1,5 +1,3 @@
-// components/DocPage.tsx
-
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Doc } from '@/lib/docs';
@@ -30,7 +28,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           isSelected ? 'font-semibold text-gray-800' : 'text-gray-500'
         } user-select-none text-lg md:text-base`}
       >
-        <Link href={doc.filePath} passHref>
+        <Link href={`/docs/${doc.filePath}`} passHref>
           <a className={isSelected ? 'font-bold text-gray-800' : ''}>{displayTitle}</a>
         </Link>
       </li>

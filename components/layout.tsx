@@ -63,7 +63,7 @@ export default function Layout({ children }: LayoutProps) {
                 className="border-2 border-slate-300 hover:border-slate-600 rounded-full px-2 hidden md:block"
                 onClick={toggleChat}
               >
-                {showChat ? 'Chat' : 'Chat'}
+                {showChat ? 'Close Chat' : 'Open Chat'}
               </button>
             </div>
           </nav>
@@ -88,7 +88,7 @@ export default function Layout({ children }: LayoutProps) {
                   }`}
                   onClick={closeMobileMenu}
                 >
-                  GitHub
+                  Chat
                 </span>
               </Link>
               <Link href="/page3" passHref>
