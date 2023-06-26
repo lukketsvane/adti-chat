@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -14,6 +15,7 @@ type DocPageProps = {
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
@@ -61,6 +63,14 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  useEffect(() => {
+    setIsSidebarOpen(false); // Close the sidebar when the selectedDoc changes
+  }, [selectedDoc]);
+
+  useEffect(() => {
+    setIsSidebarOpen(false); // Close the sidebar when the route changes
+  }, [router.asPath]);
+
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
@@ -82,10 +92,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
             const folderTitle = folder.split('/').pop();
             const displayFolderTitle = removeNumberPrefix(folderTitle);
             return (
-              <div
-                key={folder}
-                className="transition-all duration-500 user-select-none"
-              >
+              <div key={folder} className="user-select-none">
                 <div
                   className={`${
                     selectedDoc.filePath.includes(folder)
@@ -98,9 +105,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
                 </div>
                 {expandedFolders.includes(folder) && (
                   <ul className="space-y-2 pl-2">
-                    {docsByFolder[folder].map((doc) =>
-                      renderDocLink(doc, folder)
-                    )}
+                    {docsByFolder[folder].map((doc) => renderDocLink(doc, folder))}
                   </ul>
                 )}
               </div>
