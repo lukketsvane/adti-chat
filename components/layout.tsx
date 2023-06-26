@@ -45,12 +45,6 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <button
-                className="border-2 border-slate-300 hover:border-slate-600 rounded-full px-2"
-                onClick={() => setShowChat(!showChat)}
-              >
-                {showChat ? 'Hide Chat' : 'Chat'}
-              </button>
               <input type="search" placeholder="Search..." className="border-2 border-slate-300 rounded px-2" />
               <div className="md:hidden">
                 <button
