@@ -4,6 +4,7 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import markdownComponents from './markdownComponents';
+import { FiMenu } from 'react-icons/fi';
 
 type DocPageProps = {
   docs: Doc[];
@@ -12,6 +13,7 @@ type DocPageProps = {
 
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
@@ -57,37 +59,59 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   const sortedFolders = Object.keys(docsByFolder).sort();
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <div className="flex h-screen overflow-hidden">
-      <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
-        {sortedFolders.map((folder) => {
-          const folderTitle = folder.split('/').pop();
-          const displayFolderTitle = removeNumberPrefix(folderTitle);
-          return (
-            <div
-              key={folder}
-              className="transition-all duration-500 user-select-none"
-            >
+      <nav
+        className={`w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4 ${
+          isMobileMenuOpen ? 'transform translate-x-0' : 'transform -translate-x-full'
+        } md:relative md:translate-x-0 md:static md:w-auto md:overflow-visible md:border-0 transition-transform duration-300 ease-in-out`}
+      >
+        <div className="md:hidden flex items-center justify-end py-2">
+          <button
+            className="text-gray-500 hover:text-gray-800 focus:outline-none"
+            onClick={toggleMobileMenu}
+          >
+            <FiMenu size={24} />
+          </button>
+        </div>
+        <div className="md:block hidden">
+          {sortedFolders.map((folder) => {
+            const folderTitle = folder.split('/').pop();
+            const displayFolderTitle = removeNumberPrefix(folderTitle);
+            return (
               <div
-                className={`${
-                  selectedDoc.filePath.includes(folder)
-                    ? 'font-semibold text-gray-800 cursor-pointer'
-                    : 'text-gray-500 cursor-pointer'
-                }`}
-                onClick={() => handleFolderClick(folder)}
+                key={folder}
+                className="transition-all duration-500 user-select-none"
               >
-                {displayFolderTitle}
+                <div
+                  className={`${
+                    selectedDoc.filePath.includes(folder)
+                      ? 'font-semibold text-gray-800 cursor-pointer'
+                      : 'text-gray-500 cursor-pointer'
+                  }`}
+                  onClick={() => handleFolderClick(folder)}
+                >
+                  {displayFolderTitle}
+                </div>
+                {expandedFolders.includes(folder) && (
+                  <ul className="space-y-2 pl-2">
+                    {docsByFolder[folder].map((doc) =>
+                      renderDocLink(doc, folder)
+                    )}
+                  </ul>
+                )}
               </div>
-              {expandedFolders.includes(folder) && (
-                <ul className="space-y-2 pl-2">
-                  {docsByFolder[folder].map((doc) =>
-                    renderDocLink(doc, folder)
-                  )}
-                </ul>
-              )}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </nav>
       <main className="flex-1 p-10 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
@@ -99,6 +123,12 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           </ReactMarkdown>
         </div>
       </main>
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden"
+          onClick={closeMobileMenu}
+        ></div>
+      )}
     </div>
   );
 }
