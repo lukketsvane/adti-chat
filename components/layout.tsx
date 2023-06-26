@@ -81,10 +81,10 @@ export default function Layout({ children }: LayoutProps) {
                   Docs
                 </span>
               </Link>
-              <Link href="/page2" passHref>
+              <Link href="/chat" passHref>
                 <span
                   className={`cursor-pointer ${
-                    router.pathname === '/page2' ? 'font-semibold text-gray-800' : 'text-gray-500'
+                    router.pathname === '/chat' ? 'font-semibold text-gray-800' : 'text-gray-500'
                   }`}
                   onClick={closeMobileMenu}
                 >
