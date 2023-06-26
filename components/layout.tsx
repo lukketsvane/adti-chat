@@ -105,12 +105,13 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         )}
       </header>
+      {showChat && <Chat onClose={toggleChat} />}
+
       <div>
         <main className="flex w-full flex-1 flex-col overflow-hidden">
           {children}
         </main>
       </div>
-      {showChat && <Chat onClose={toggleChat} />}
     </div>
   );
 }
