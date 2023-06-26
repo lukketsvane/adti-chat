@@ -1,0 +1,7 @@
+# 1st
+
+8hr sleep: No
+Journal: No
+Meditate: No
+Progress: 0
+Run: No
