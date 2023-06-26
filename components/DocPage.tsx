@@ -64,10 +64,10 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen">
       {/* Sidebar */}
       <nav
-        className={`w-0 md:w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4 ${
+        className={`w-0 md:w-64 bg-white border-r overflow-auto px-4 ${
           isSidebarOpen ? 'w-64' : ''
         } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
       >
@@ -112,7 +112,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
       </nav>
       {/* Main Content */}
       <main className="flex-1 p-10 overflow-auto">
-        <div className="prose dark:prose-dark max-w-none overflow-scroll">
+        <div className="prose max-w-none overflow-scroll">
           <ReactMarkdown components={markdownComponents} remarkPlugins={[gfm]}>
             {selectedDoc.content}
           </ReactMarkdown>
