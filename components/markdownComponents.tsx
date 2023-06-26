@@ -12,7 +12,7 @@ const components = {
   del: (props) => <del {...props} />,
   a: (props) => <a style={{ color: 'grey', textDecoration: 'underline' }} {...props} />,
   p: (props) => <p {...props} />,
-  img: (props) => <Image {...props} layout="responsive" maxWidth="100%" />,
+  img: ({ src, alt }) => <Image src={src} alt={alt} layout="responsive" maxWidth="100%" />,
   table: (props) => <table style={{ borderCollapse: 'collapse', width: '100%' }} {...props} />,
   thead: (props) => <thead {...props} />,
   tbody: (props) => <tbody {...props} />,
