@@ -68,8 +68,8 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
       {/* Sidebar */}
       <nav
         className={`w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4 ${
-          isSidebarOpen ? 'transform translate-x-0' : 'transform -translate-x-full'
-        } md:relative md:translate-x-0 md:static md:w-auto md:overflow-visible md:border-0 transition-transform duration-300 ease-in-out`}
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } transform md:relative md:translate-x-0 md:static md:w-auto md:overflow-visible md:border-0 transition-transform duration-300 ease-in-out`}
       >
         <div className="md:hidden flex items-center justify-end py-2">
           <button
