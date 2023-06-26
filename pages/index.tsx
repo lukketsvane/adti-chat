@@ -14,10 +14,8 @@ export default function Home() {
     <Layout>
       <div className="fixed z-10 bottom-4 right-4 md:bottom-6 md:right-6">
         <button
-          className="bg-blue-500 text-white rounded-full p-2 md:p-4 shadow-md"
           onClick={toggleChat}
         >
-          Chat
         </button>
       </div>
       <div style={{position: 'relative'}}>

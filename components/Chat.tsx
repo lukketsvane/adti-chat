@@ -89,7 +89,7 @@ export default function Chat({ onClose }: { onClose: () => void }) {
             {
               type: 'apiMessage',
               message: data.text,
-              sourceDocs: data.sourceDocuments,
+              sourceDocs: data.sourceDocuments.slice(0, 2),
             },
           ],
           history: [...state.history, [question, data.text]],
@@ -116,7 +116,7 @@ export default function Chat({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed bottom-2 right-2 w-80 h-2/3 bg-white shadow-xl flex flex-col p-4 rounded">
+    <div className="fixed bottom-2 right-2 w-1/4 h-3/5 bg-white shadow-xl flex flex-col p-4 rounded">
       <div className="flex justify-between items-center">
         <button className="text-xl text-gray-200 rounded-full" onClick={onClose}>X</button>
       </div>

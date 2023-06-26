@@ -1,11 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import Chat from '@/components/Chat';
 
 interface LayoutProps {
   children?: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
+  const [showChat, setShowChat] = useState<boolean>(false);
+
   return (
     <div className="mx-auto flex flex-col space-y-4">
       <header className="container sticky top-0 z-40 bg-white">
@@ -25,6 +29,13 @@ export default function Layout({ children }: LayoutProps) {
             <Link href="/page3">
               <span className="hover:text-slate-600 cursor-pointer">Page 3</span>
             </Link>
+            <button
+              className="border-2 border-slate-300 hover:border-slate-600 rounded-full px-2"
+              onClick={() => setShowChat(!showChat)}
+            >
+              {showChat ? 'chat' : 'Chat'}
+            </button>
+            {showChat && <Chat onClose={() => setShowChat(false)} />}
           </nav>
         </div>
       </header>
