@@ -21,10 +21,10 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </Link>
             <Link href="/page1">
-              <span className="hover:text-slate-600 cursor-pointer">Page 1</span>
+              <span className="hover:text-slate-600 cursor-pointer">docs</span>
             </Link>
             <Link href="/page2">
-              <span className="hover:text-slate-600 cursor-pointer">Page 2</span>
+              <span className="hover:text-slate-600 cursor-pointer">GitHub</span>
             </Link>
             <Link href="/page3">
               <span className="hover:text-slate-600 cursor-pointer">Page 3</span>
