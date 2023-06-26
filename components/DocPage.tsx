@@ -1,4 +1,5 @@
 // components/DocPage.tsx
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Doc } from '@/lib/docs';
@@ -55,7 +56,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   const removeNumberPrefix = (title: string): string => {
-    return title.replace(/^\d+(\.\d+)?(-)? /, '').replace(/-/g, ' ');
+    return title.replace(/^\d+(\.\d+)? /, '');
   };
 
   const sortedFolders = Object.keys(docsByFolder).sort();
@@ -76,7 +77,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     <div className="flex h-screen">
       {/* Sidebar */}
       <nav
-        className={`w-0 md:w-64 bg-white border-r overflow-auto ${
+        className={`w-0 md:w-64 bg-white border-r overflow-auto px-4 ${
           isSidebarOpen ? 'w-full' : ''
         } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
       >
@@ -89,9 +90,11 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           </button>
         </div>
         <div className={`md:block ${isSidebarOpen ? '' : 'hidden'}`}>
-          {sortedFolders.map((folder) => {
+          {sortedFolders.map((folder, index) => {
             const folderTitle = folder.split('/').pop();
             const displayFolderTitle = removeNumberPrefix(folderTitle);
+            const isTopLevelFolder = folder.split('/').length === 1;
+
             return (
               <div key={folder} className="user-select-none">
                 <div
@@ -102,7 +105,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
                   }`}
                   onClick={() => handleFolderClick(folder)}
                 >
-                  {displayFolderTitle}
+                  {isTopLevelFolder ? `${index + 1}. ${displayFolderTitle}` : displayFolderTitle}
                 </div>
                 {expandedFolders.includes(folder) && (
                   <ul className="space-y-2 pl-2">
