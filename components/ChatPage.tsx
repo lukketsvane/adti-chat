@@ -26,7 +26,7 @@ const ChatPage = () => {
   }>({
     messages: [
       {
-        message: 'Hi, what would you like to learn about this document?',
+        message: 'What is a Digital Twin?',
         type: 'apiMessage',
       },
     ],
@@ -219,7 +219,7 @@ const ChatPage = () => {
                   placeholder={
                     loading
                       ? 'Waiting for response...'
-                      : 'What is this legal case about?'
+                      : 'What is a shadow twin?'
                   }
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -255,11 +255,6 @@ const ChatPage = () => {
           )}
         </main>
       </div>
-      <footer className="m-auto p-4">
-        <a href="https://twitter.com/mayowaoshin">
-          Powered by LangChainAI. Demo built by Mayo (Twitter: @mayowaoshin).
-        </a>
-      </footer>
     </Layout>
   );
 };
