@@ -1,0 +1,67 @@
+# WP2: Business Case Analysis
+
+Last edited time: June 26, 2023 12:32 PM
+
+## WP2: Business Case Analysis
+
+### Overview
+
+The second work package (WP2) revolves around establishing and qualifying the business case for digital twins. This stage includes an in-depth market analysis, a review of existing solutions, and discussions with both peers and customers to understand potential revenue streams and customer needs.
+
+### Budget Details
+
+The budget allocated for this work package is 1,301,950 NOK. The resources are divided as follows:
+
+| Category No | Category Name | Resource Name | Resource Category | Hours | Hourly Rate | Total Cost | Other |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2 | Project & Site manager, Resp. eng. lead | Project Manager | Internal rates | - | 1,315 NOK | - | 300,000 NOK |
+| 4 | Engineer, Purchaser, Project controller | Linnea Espevik | Internal rates | 250 | 1,095 NOK | 273,750 NOK | 25,000 NOK |
+| 4 | Engineer, Purchaser, Project controller | Iver Finne | Internal rates | 145 | 1,095 NOK | 158,775 NOK | 25,000 NOK |
+| 1 | Specialist | Håkon Berg | Internal rates | 155 | 1,315 NOK | 203,825 NOK | - |
+| 1 | Specialist | John Pretlove | Internal rates | 80 | 1,315 NOK | 105,200 NOK | - |
+| 4 | Engineer, Purchaser, Project controller | Hanna Kjøniksen | Internal rates | - | 1,095 NOK | - | - |
+| 1 | Specialist | Thomas Havsberg | Internal rates | 60 | 1,315 NOK | 78,900 NOK | - |
+| 1 | Specialist | Arne Klette | Internal rates | 50 | 1,315 NOK | 65,750 NOK | - |
+| 1 | Specialist | Other Specialists | Internal rates | 50 | 1,315 NOK | 65,750 NOK | - |
+
+### Objectives
+
+The main objectives of WP2 are to:
+
+- Establish and qualify the business case for digital twins.
+
+### Scope of Work
+
+The work package is divided into the following activities:
+
+- Market analysis (200 hours)
+- Attend relevant seminars and courses (90 hours)
+- Review existing digital twin solutions and companies (40 hours)
+- Interview peers (60 hours)
+- Describe potential revenue streams (70 hours)
+- Scope out roadmap and requirements for different ABB Digital twin solutions in the overall landscape (60 hours)
+- Propose a value proposition (60 hours)
+- Design thinking process workshop and "customer end game" discussions (80 hours)
+- Establish a business case using existing customers and projects (40 hours)
+- Explore potential customer cases (140 hours)
+- Review customer/partner existing digital projects with ABB and/or digital projects in hand (10 hours)
+- Screen customer cases to find a good fit (60 hours)
+- Approach customer through ABB contact, i.e., SAM/GAM (60 hours)
+- Conduct Customer "design thinking" workshops (20 hours)
+- Presentation of result (60 hours)
+
+### Input
+
+- Findings from WP1, WP3, and WP4
+- Input from peers in ABB locally and globally
+- Customer workshops
+
+### Deliverables
+
+- Updated business case
+- Market analysis
+- Potential business models
+- Customer use cases
+- Risk and opportunities
+
+At the end of WP2, we will have a comprehensive business case detailing the potential market, revenue streams, and customer use cases for digital twins, as well as a thorough understanding of the risks and opportunities associated with this venture.

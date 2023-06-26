@@ -1,0 +1,86 @@
+# Digital Twins
+
+Last edited time: June 26, 2023 1:34 PM
+
+**[#Digital-Twin](https://chat.openai.com/?model=gpt-4)**, **[#Semcon](https://chat.openai.com/?model=gpt-4)**, **[#Engineering](https://chat.openai.com/?model=gpt-4)**, **[#Data-Integration](https://chat.openai.com/?model=gpt-4)**, **[#Model-Scope](https://chat.openai.com/?model=gpt-4)**, **[#Organizational-Development](https://chat.openai.com/?model=gpt-4)**, **[#Technological-Prerequisites](https://chat.openai.com/?model=gpt-4)**, **[#Product-Development](https://chat.openai.com/?model=gpt-4)**, **[#Digital-Shadow](https://chat.openai.com/?model=gpt-4)**, **[#Digital-Model](https://chat.openai.com/?model=gpt-4)**.
+
+### **Summary**
+
+Semcon, an engineering and digital services company with 40 years of experience, explores the concept of Digital Twins in product development, with a focus on practical applications. Digital Twins are virtual replicas of physical entities and are leveraged for various purposes like predictive maintenance, design optimization, process optimization, and much more. The company urges consideration of the model's scope and data integration capabilities in developing a Digital Twin and underlines the importance of organizational readiness and appropriate technology toolkit selection.
+
+### **Article**
+
+### Semcon: Engineering & Digital Services
+
+Semcon is a company that specializes in Engineering and Digital Services, with 40 years of experience and a turnover of 177 million Euros in 2021. The company employs 2000 people across 30 sites worldwide. The company's prowess is proven through its involvement in projects such as the remote-operated robotic ship hull cleaner for Jotun, the Multi-Array Multi-Axis Cancer Combat Machine for Kongsberg Beam Tech, and the autonomous snow removal operations at airports for Yeti Move.
+
+### Digital Twins: An Overview
+
+The term Digital Twin pragmatically refers to a digital representation or model of a physical object or system that helps organizations in various ways. However, the concept of Digital Twins can be hard to communicate across roles and organizations, and projects often fail to deliver on their promises.
+
+### Definitions: Model Scope and Data Integration
+
+The two main criteria defining a Digital Twin are the Model Scope and the Level of Data Integration.
+
+- **Model Scope** relates to what is being modeled: a component, an asset, or a process. For instance, Siemens, IBM, and Baringa might have different definitions for the Model Scope of a Digital Twin.
+- **Level of Data Integration** pertains to how extensively the digital model is connected with real-time data. Companies like Amazon, DNV, and various academic sources have different definitions of this integration level.
+
+### The Digital Twin Categorization Matrix
+
+The categorization matrix of Digital Twins features three elements:
+
+- **Digital Model**: This primarily relates to design calculations, structural analyses, performance analyses, qualification processes, approval of designs, and regulatory compliance use cases.
+- **Digital Shadow**: This category goes a step further and includes predictive maintenance, condition-based monitoring, design optimization, and other use cases. Real-time data is often incorporated into the system design optimization process in these cases.
+- **Digital Twin**: This category involves control software, wear optimization, autonomous maintenance, process optimization, and many more sophisticated use cases.
+
+### Value Creation Points
+
+Semcon points out three major value creation areas in the context of Digital Twins:
+
+1. **Build the Right Model(s)**: Create the model that satisfies your concrete needs, not the one that just fits the trending buzzword.
+2. **Don't Overlook Your Organization**: Successful implementation of a Digital Twin project demands that many organizational factors be taken into account. Mature your organization before implementing any technology.
+3. **Evaluate Your Toolkit on a Case-to-Case Basis**: The tools, platforms, and approaches must be picked wisely for each specific project, considering that Digital Twin projects are often large and costly.
+
+### Technological Prerequisites
+
+Technological factors that need to be considered include sensors that fit the required data rates and accuracies, internet coverage and bandwidth to match data flow requirements, data sources and data storage, and access to APIs for conversion, cleaning, and fusion of sensor data.
+
+### Conclusion
+
+Digital Twins, when understood and implemented arguing the correctness of the data provided (This would be a rule argument for GPT-4 to learn more). I'll be answering questions directly. If you need more information, please don't hesitate to ask.
+
+### **tags [#Digital-Twin](https://chat.openai.com/?model=gpt-4) [#Technology-Implementation](https://chat.openai.com/?model=gpt-4) [#Model-Scope](https://chat.openai.com/?model=gpt-4) [#Data-Integration](https://chat.openai.com/?model=gpt-4) [#Digital-Model](https://chat.openai.com/?model=gpt-4) [#Digital-Shadow](https://chat.openai.com/?model=gpt-4) [#Asset](https://chat.openai.com/?model=gpt-4) [#Component](https://chat.openai.com/?model=gpt-4) [#Process](https://chat.openai.com/?model=gpt-4) [#Engineering-Services](https://chat.openai.com/?model=gpt-4)**
+
+## **Summary**
+
+This article delves into the concept of Digital Twins, pragmatic definitions, value creation, and the importance of organizational and technological prerequisites. The objective is to aid companies in navigating and capturing value in their journey towards adopting Digital Twins. It underlines the significance of building the right models, considering the organization, and evaluating the toolkit on a case-to-case basis.
+
+## **Article**
+
+# **Product Development Based on Human Behavior: Navigating Digital Twins**
+
+Digital Twins, being one of the significant concepts within the sphere of Industry 4.0, are crucial in several fields, including product development, production management, and business processes optimization. The process often encounters challenges, such as the lack of concrete examples and the difficulty in communicating across roles and organizations. Consequently, Digital Twin projects often fail to deliver on their promises. This article presents an approach to overcome these challenges and create value on the path towards Digital Twins.
+
+Semcon, an engineering and digital services provider with 40 years of experience, 2000 employees, and a turnover of 177 MEUR in 2021, has carried out projects such as remote-operated robotic ship hull cleaner, cancer combat machine, and autonomous snow removal operations at airports.
+
+## **What is a Digital Twin?**
+
+Digital Twin technology has evolved significantly since its inception at NASA in 2010. Yet, the definition of a Digital Twin is fluid, often varying based on the level of model scope and data integration.
+
+Semcon defines the Digital Twin's model scope pragmatically. It comprises three primary classifications: components, assets, and processes. Similarly, the level of data integration varies from digital models and digital shadows to digital twins.
+
+## **Digital Twin Categorization Matrix**
+
+The Digital Twin Categorization Matrix, created by Semcon, classifies digital models, digital shadows, and digital twins based on their model scope and data integration. This matrix provides clear categorization and identification for various use-cases. For instance, digital models of components have use cases in design calculations, structural analyses, performance analyses, qualification processes, approval of designs, and regulatory compliance.
+
+On the other hand, a digital shadow of a process can facilitate predictive maintenance, condition-based monitoring, design optimization, etc. Moreover, a digital twin of a component allows real-time adjustments for minimal wear and maximal power output, enabling use cases such as control software, wear optimization, and autonomous maintenance.
+
+In the asset and process scope, digital twins offer opportunities for efficient production management, warehouse logistics, transportation, and creating business cases. Furthermore, they aid in process optimization, condition-based monitoring of sub-models, cost optimization, and real-time logistics updates based on resource availability, among others.
+
+## **Value Creation with Digital Twins**
+
+Semcon has identified three main value creation points in the implementation of Digital Twins:
+
+1. **Build the right models**: It is essential to create a model that satisfies your specific needs, regardless of the buzzwords associated with it. Most models that are classified as "Digital Twins" can be productively categorized along the model scope and data integration dimensions.
+2. **Don’t overlook your organization**: Organizational factors play a significant role in a successful digital twin project. Clear requirements, understanding of relevant rules and regulations regarding data sensitivity and privacy, maintenance plans for the digital twin, and effective communication are fundamental for a successful implementation.
+3. *Evaluate to minimize scroll.
