@@ -1,16 +1,4 @@
-import { Prism } from 'prism-react-renderer';
-
 const components = {
-  code({ node, inline, className, children, ...props }) {
-    const match = /language-(\w+)/.exec(className || '');
-    return !inline && match ? (
-      <Prism language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
-    ) : (
-      <code className={className} {...props}>
-        {children}
-      </code>
-    );
-  },
   h1: (props) => <h1 style={{ fontSize: '2em', borderBottom: '1px solid #eaecef', paddingBottom: '0.3em', paddingTop: '0.8em' }} {...props} />,
   h2: (props) => <h2 style={{ fontSize: '1.5em', borderBottom: '1px solid #eaecef', paddingBottom: '0.3em', paddingTop: '0.8em' }} {...props} />,
   h3: (props) => <h3 style={{ fontSize: '1.2em', paddingTop: '0.8em', paddingBottom: '0.3em' }} {...props} />,
@@ -31,7 +19,6 @@ const components = {
     <blockquote style={{ color: '#6a737d', borderLeft: '0.25em solid #dfe2e5', padding: '0 1em' }}>{children}</blockquote>
   ),
   hr: () => <hr />,
-  img: ({ alt = '', ...props }) => <img alt={alt} {...props} />
 };
 
 export default components;
