@@ -16,7 +16,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className={darkMode ? "dark mx-auto flex flex-col space-y-4 p-6" : "mx-auto flex flex-col space-y-4 "}>
       <header className="sticky top-0 z-40 bg-white">
-        <div className="h-16 border-b border-b-slate-200  px-6">
+        <div className="h-16 border-b border-b-slate-200 py-4 px-6">
           <nav className="flex items-center justify-between space-x-4">
             <div className="flex items-center space-x-4">
               <Link href="/">
