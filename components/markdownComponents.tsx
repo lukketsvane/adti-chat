@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const components = {
   h1: (props) => <h1 style={{ fontSize: '2em', borderBottom: '1px solid #eaecef', paddingBottom: '0.3em', paddingTop: '0.8em' }} {...props} />,
   h2: (props) => <h2 style={{ fontSize: '1.5em', borderBottom: '1px solid #eaecef', paddingBottom: '0.3em', paddingTop: '0.8em' }} {...props} />,
@@ -9,6 +11,8 @@ const components = {
   strong: (props) => <strong {...props} />,
   del: (props) => <del {...props} />,
   a: (props) => <a style={{ color: 'grey', textDecoration: 'underline' }} {...props} />,
+  p: (props) => <p {...props} />,
+  img: (props) => <Image {...props} layout="responsive" maxWidth="100%" />,
   table: (props) => <table style={{ borderCollapse: 'collapse', width: '100%' }} {...props} />,
   thead: (props) => <thead {...props} />,
   tbody: (props) => <tbody {...props} />,
