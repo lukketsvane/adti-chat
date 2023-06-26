@@ -118,7 +118,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         </div>
       </nav>
       {/* Main Content */}
-      <main className="flex-1 p-10 overflow-auto">
+      <main className="flex-1 p-4 overflow-auto">
         <div className="prose max-w-none overflow-scroll">
           <ReactMarkdown components={markdownComponents} remarkPlugins={[gfm]}>
             {selectedDoc.content}
