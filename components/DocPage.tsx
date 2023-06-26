@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+// components/DocPage.tsx
+import { useState } from 'react';
 import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -15,11 +15,12 @@ type DocPageProps = {
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const router = useRouter();
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
-    const displayTitle = removeNumberPrefix(doc.data.title || doc.filePath.split('/').pop());
+    const displayTitle = removeNumberPrefix(
+      doc.data.title || doc.filePath.split('/').pop()
+    );
 
     return (
       <li
@@ -29,7 +30,9 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         } user-select-none`}
       >
         <Link href={doc.filePath} passHref>
-          <a className={isSelected ? 'font-bold text-gray-800' : ''}>{displayTitle}</a>
+          <span className={isSelected ? 'font-bold text-gray-800' : ''}>
+            {displayTitle}
+          </span>
         </Link>
       </li>
     );
@@ -54,7 +57,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   const removeNumberPrefix = (title: string): string => {
-    return title.replace(/^\d+(\.\d+)? /, '');
+    return title.replace(/^\d+(\.\d+)? /, '').replace(/-/g, ' ');
   };
 
   const sortedFolders = Object.keys(docsByFolder).sort();
@@ -63,21 +66,13 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  useEffect(() => {
-    setIsSidebarOpen(false); // Close the sidebar when the selectedDoc changes
-  }, [selectedDoc]);
-
-  useEffect(() => {
-    setIsSidebarOpen(false); // Close the sidebar when the route changes
-  }, [router.asPath]);
-
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
       <nav
-        className={`w-0 md:w-64 bg-white border-r overflow-auto px-4 ${
-          isSidebarOpen ? 'w-full' : ''
-        } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
+        className={`w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4 ${
+          isSidebarOpen ? 'transform translate-x-0' : 'transform -translate-x-full'
+        } md:relative md:translate-x-0 md:static md:w-auto md:overflow-visible md:border-0 transition-transform duration-300 ease-in-out`}
       >
         <div className="md:hidden flex items-center justify-end py-2">
           <button
@@ -87,12 +82,15 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
             <FiMenu size={24} />
           </button>
         </div>
-        <div className={`md:block ${isSidebarOpen ? '' : 'hidden'}`}>
+        <div className="md:block hidden">
           {sortedFolders.map((folder) => {
             const folderTitle = folder.split('/').pop();
             const displayFolderTitle = removeNumberPrefix(folderTitle);
             return (
-              <div key={folder} className="user-select-none">
+              <div
+                key={folder}
+                className="transition-all duration-500 user-select-none"
+              >
                 <div
                   className={`${
                     selectedDoc.filePath.includes(folder)
@@ -105,7 +103,9 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
                 </div>
                 {expandedFolders.includes(folder) && (
                   <ul className="space-y-2 pl-2">
-                    {docsByFolder[folder].map((doc) => renderDocLink(doc, folder))}
+                    {docsByFolder[folder].map((doc) =>
+                      renderDocLink(doc, folder)
+                    )}
                   </ul>
                 )}
               </div>
@@ -114,13 +114,23 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         </div>
       </nav>
       {/* Main Content */}
-      <main className="flex-1 px-10 py-2 overflow-auto">
-        <div className="prose max-w-none overflow-scroll">
-          <ReactMarkdown components={markdownComponents} remarkPlugins={[gfm]}>
+      <main className="flex-1 p-10 overflow-auto">
+        <div className="prose dark:prose-dark max-w-none overflow-scroll">
+          <ReactMarkdown
+            components={markdownComponents}
+            remarkPlugins={[gfm]}
+          >
             {selectedDoc.content}
           </ReactMarkdown>
         </div>
       </main>
+      {/* Mobile Menu Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden"
+          onClick={toggleSidebar}
+        ></div>
+      )}
     </div>
   );
 }
