@@ -13,7 +13,7 @@ export default function Search() {
 
     // Ensure that searchQuery is a string.
     if (Array.isArray(searchQuery)) {
-      searchQuery = searchQuery.join(' ');
+      searchQuery = searchQuery[0] || '';
     }
 
     if (!searchQuery) {
