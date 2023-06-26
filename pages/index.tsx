@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '@/components/layout';
-import Chat from '@/components/Chat';
+import Chat from '@/components/Chat-window';
 import FullPageIframe from '@/components/FullPageIframe';
 
 export default function Home() {

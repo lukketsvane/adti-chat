@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Chat from '@/components/Chat';
+import Chat from '@/components/Chat-window';
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);

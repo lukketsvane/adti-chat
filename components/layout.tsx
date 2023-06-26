@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { useRouter } from 'next/router';
-import Chat from '@/components/Chat';
+import Chat from '@/components/Chat-window';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -41,8 +41,8 @@ export default function Layout({ children }: LayoutProps) {
                 <Link href="/docs" passHref>
                   <span className="hover:text-slate-600 cursor-pointer">Docs</span>
                 </Link>
-                <Link href="/page2" passHref>
-                  <span className="hover:text-slate-600 cursor-pointer">GitHub</span>
+                <Link href="/chat" passHref>
+                  <span className="hover:text-slate-600 cursor-pointer">Chat</span>
                 </Link>
                 <Link href="/page3" passHref>
                   <span className="hover:text-slate-600 cursor-pointer">Page 3</span>
