@@ -1,3 +1,4 @@
+// components/Chat.tsx
 import { useRef, useState, useEffect } from 'react';
 import styles from '@/styles/Home.module.css';
 import { Message } from '@/types/chat';
@@ -139,9 +140,6 @@ export default function Chat({ onClose }: { onClose: () => void }) {
                       <ReactMarkdown linkTarget="_blank">
                         {doc.pageContent}
                       </ReactMarkdown>
-                      <p className="mt-2">
-                        <b>Source:</b> {doc.metadata.source}
-                      </p>
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -164,8 +162,7 @@ export default function Chat({ onClose }: { onClose: () => void }) {
           ref={textAreaRef}
         />
         <button type="submit" className="mt-2 w-full py-2 bg-blue-500 text-white rounded">
-        {loading ? <LoadingDots color="white" /> : 'Send'}
-
+          {loading ? <LoadingDots color="white" /> : 'Send'}
         </button>
       </form>
     </div>
