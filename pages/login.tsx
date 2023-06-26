@@ -1,5 +1,3 @@
-// login.tsx
-
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -11,7 +9,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (username === "admin" && password === "admin") {
+    if (username === "admin" && password === "S2Gjs9vj!") {
       localStorage.setItem("isLoggedIn", "true");
       router.push("/");
     } else {
@@ -62,7 +60,3 @@ export default function Login() {
     </div>
   );
 }
-
-
-// _app.tsx
-
