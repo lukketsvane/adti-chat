@@ -25,7 +25,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           isSelected ? 'font-semibold text-gray-800' : 'text-gray-500'
         } user-select-none`}
       >
-        <Link href={doc.filePath} passHref>
+        <Link href={doc.filePath.replace(/ /g, '-')} passHref>
           <span className={isSelected ? 'font-bold text-gray-800' : ''}>
             {displayTitle}
           </span>
@@ -53,22 +53,17 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   const removeNumberPrefix = (title: string): string => {
-    return title.replace(/^\d+(\.\d+)? /, '');
+    return title.replace(/^\d+(\.\d+)?(-)? /, '');
   };
 
   const sortedFolders = Object.keys(docsByFolder).sort();
 
-  const replaceHyphenWithSpace = (title: string): string => {
-    return title.replace(/-/g, ' ');
-  };
-
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
       <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
         {sortedFolders.map((folder) => {
           const folderTitle = folder.split('/').pop();
-          const displayFolderTitle = removeNumberPrefix(replaceHyphenWithSpace(folderTitle));
+          const displayFolderTitle = removeNumberPrefix(folderTitle);
           return (
             <div
               key={folder}
@@ -95,7 +90,6 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           );
         })}
       </nav>
-      {/* Main Content */}
       <main className="flex-1 p-10 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
           <ReactMarkdown
