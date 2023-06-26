@@ -3,8 +3,7 @@ import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'prism-react-renderer';
-import { render } from 'react-dom';
+import markdownComponents from './markdownComponents';
 
 type DocPageProps = {
   docs: Doc[];
@@ -13,28 +12,6 @@ type DocPageProps = {
 
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const [expandedFolders, setExpandedFolders] = useState([]);
-
-  const components = {
-    code({node, inline, className, children, ...props}) {
-      const match = /language-(\w+)/.exec(className || '')
-      return !inline && match ? (
-        <SyntaxHighlighter language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
-      ) : (
-        <code className={className} {...props}>
-          {children}
-        </code>
-      )
-    },
-    h1: ({node, ...props}) => <h1 style={{fontSize: "2em"}} {...props} />,
-    h2: ({node, ...props}) => <h2 style={{fontSize: "1.5em"}} {...props} />,
-    h3: ({node, ...props}) => <h3 style={{fontSize: "1.2em"}} {...props} />,
-    ul: ({node, ...props}) => <ul style={{listStyleType: "disc"}} {...props} />,
-    ol: ({node, ...props}) => <ol style={{listStyleType: "decimal"}} {...props} />,
-    em: ({node, ...props}) => <em style={{fontStyle: "italic"}} {...props} />,
-    strong: ({node, ...props}) => <strong style={{fontWeight: "bold"}} {...props} />,
-    del: ({node, ...props}) => <del style={{textDecoration: "line-through"}} {...props} />,
-    a: ({node, ...props}) => <a style={{color: "grey", textDecoration: "underline"}} {...props} />,
-  }
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
@@ -90,7 +67,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
       </nav>
       <main className="flex-1 p-10 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
-          <ReactMarkdown components={components} remarkPlugins={[gfm]}>
+          <ReactMarkdown components={markdownComponents} remarkPlugins={[gfm]}>
             {selectedDoc.content}
           </ReactMarkdown>
         </div>

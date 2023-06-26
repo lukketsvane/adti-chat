@@ -2,7 +2,7 @@
 
 # Creating Pages for ABB Digital Twin Initiative Wiki
 
-Creating and updating pages for the ADTI Wiki is as easy as crafting a Markdown file (.md) with your chosen text editor. There are several key aspects to your files that need attention when you're crafting pages.
+- Creating and updating pages for the ADTI Wiki is as easy as crafting a Markdown file (.md) with your chosen text editor. There are several key aspects to your files that need attention when you're crafting pages.
 
 ## File Location
 
@@ -43,7 +43,7 @@ If no meta title is specified, the filename will be used to generate a page titl
 
 You can also use certain variables in your Markdown pages, which will be replaced with the values you set in your config.
 
-- `%base_url%`: The base URL of your site
+a
 - `%image_url%`: The base URL of your images folder (public/images)
 
 *Last updated on 19th Jun 2023.*
