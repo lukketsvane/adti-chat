@@ -15,8 +15,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
-    const file = doc.filePath.split('/').pop();
-    const displayTitle = removeNumberPrefix(file);
+    const displayTitle = removeNumberPrefix(doc.data.title || doc.filePath.split('/').pop());
 
     return (
       <li
@@ -36,8 +35,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   const docsByFolder: Record<string, Doc[]> = docs.reduce((acc, doc) => {
     const parts = doc.filePath.split('/');
-    const file = parts.pop();
-    const folder = parts.join('/');
+    const folder = parts.slice(0, -1).join('/');
     acc[folder] = [...(acc[folder] || []), doc];
     return acc;
   }, {});
@@ -54,13 +52,15 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   const removeNumberPrefix = (title: string): string => {
-    return title.replace(/^\d+\.\d+ |^\d+ /, '');
+    return title.replace(/^\d+(\.\d+)? /, '');
   };
+
+  const sortedFolders = Object.keys(docsByFolder).sort();
 
   return (
     <div className="flex h-screen overflow-hidden">
       <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
-        {Object.keys(docsByFolder).map((folder) => {
+        {sortedFolders.map((folder) => {
           const folderTitle = folder.split('/').pop();
           const displayFolderTitle = removeNumberPrefix(folderTitle);
           return (
@@ -89,7 +89,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           );
         })}
       </nav>
-      <main className="flex-1 p-10 pr-26 overflow-auto">
+      <main className="flex-1 p-10 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
           <ReactMarkdown
             components={markdownComponents}
