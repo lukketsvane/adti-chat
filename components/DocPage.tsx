@@ -26,6 +26,14 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
       )
     },
     h1: ({node, ...props}) => <h1 style={{fontSize: "2em"}} {...props} />,
+    h2: ({node, ...props}) => <h2 style={{fontSize: "1.5em"}} {...props} />,
+    h3: ({node, ...props}) => <h3 style={{fontSize: "1.2em"}} {...props} />,
+    ul: ({node, ...props}) => <ul style={{listStyleType: "disc"}} {...props} />,
+    ol: ({node, ...props}) => <ol style={{listStyleType: "decimal"}} {...props} />,
+    em: ({node, ...props}) => <em style={{fontStyle: "italic"}} {...props} />,
+    strong: ({node, ...props}) => <strong style={{fontWeight: "bold"}} {...props} />,
+    del: ({node, ...props}) => <del style={{textDecoration: "line-through"}} {...props} />,
+    a: ({node, ...props}) => <a style={{color: "grey", textDecoration: "underline"}} {...props} />,
   }
 
   const renderDocLink = (doc: Doc, folder: string) => {
