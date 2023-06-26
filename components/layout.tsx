@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import Chat from '@/components/Chat';
-import { useDarkMode } from '@/pages/darkModeContext';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -11,10 +10,10 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const [showChat, setShowChat] = useState<boolean>(false);
-  const { darkMode, toggleDarkMode } = useDarkMode();
+
 
   return (
-    <div className={darkMode ? "dark mx-auto flex flex-col space-y-4 p-6" : "mx-auto flex flex-col space-y-4 "}>
+    <div className={"mx-auto flex flex-col space-y-4 "}>
       <header className="sticky top-0 z-40 bg-white">
         <div className="h-16 border-b border-b-slate-200 py-4 px-6">
           <nav className="flex items-center justify-between space-x-4">
@@ -35,12 +34,6 @@ export default function Layout({ children }: LayoutProps) {
               </Link>
             </div>
             <div className="flex items-center space-x-4">
-              <button
-                className="border-2 border-slate-300 hover:border-slate-600 rounded-full px-2"
-                onClick={toggleDarkMode}
-              >
-                {darkMode ? 'Light Mode' : 'Dark Mode'}
-              </button>
               <button
                 className="border-2 border-slate-300 hover:border-slate-600 rounded-full px-2"
                 onClick={() => setShowChat(!showChat)}
