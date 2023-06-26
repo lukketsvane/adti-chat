@@ -1,3 +1,4 @@
+// ./components/DocPage.tsx
 import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -20,18 +21,20 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   return (
     <div className="flex">
-      <nav className="sticky top-0 h-screen w-64 overflow-auto">
-        <ul>
+      <nav className="sticky top-0 h-screen w-64 overflow-auto border-r border-gray-200 p-4">
+        <ul className="space-y-2">
           {docs.map((doc, idx) => (
-            <li key={idx}>
+            <li key={idx} className={doc === selectedDoc ? "font-semibold text-gray-800" : "text-gray-500"}>
               <Link href={doc.filePath}>
-                <span>{doc.title || doc.filePath.split('/').pop()}</span>
+                <span className={doc === selectedDoc ? 'font-bold text-gray-800' : ''}>
+                  {doc.title || doc.filePath.split('/').pop()}
+                </span>
               </Link>
             </li>
           ))}
         </ul>
       </nav>
-      <main className="flex-1 p-10">
+      <main className="flex-1 p-10 overflow-y-auto">
         <ReactMarkdown renderers={renderers} children={selectedDoc.content} />
       </main>
     </div>
