@@ -1,9 +1,9 @@
-// components/layout.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { useRouter } from 'next/router';
+import Chat from '@/components/Chat';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -110,6 +110,7 @@ export default function Layout({ children }: LayoutProps) {
           {children}
         </main>
       </div>
+      {showChat && <Chat onClose={toggleChat} />}
     </div>
   );
 }
