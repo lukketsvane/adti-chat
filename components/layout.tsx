@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import Chat from '@/components/Chat';
-import { useDarkMode } from '@/pages/darkModeContext'; // Modify path as necessary
+import { useDarkMode } from '@/pages/darkModeContext';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -19,18 +19,18 @@ export default function Layout({ children }: LayoutProps) {
         <div className="h-16 border-b border-b-slate-200 py-4 px-6">
           <nav className="flex items-center justify-between space-x-4">
             <div className="flex items-center space-x-4">
-              <Link href="/">
+              <Link href="/" passHref>
                 <div className="cursor-pointer">
                   <Image src="/logo.png" alt="logo" width={50} height={50} />
                 </div>
               </Link>
-              <Link href="/docs">
+              <Link href="/docs" passHref>
                 <span className="hover:text-slate-600 cursor-pointer">Docs</span>
               </Link>
-              <Link href="/page2">
+              <Link href="/page2" passHref>
                 <span className="hover:text-slate-600 cursor-pointer">GitHub</span>
               </Link>
-              <Link href="/page3">
+              <Link href="/page3" passHref>
                 <span className="hover:text-slate-600 cursor-pointer">Page 3</span>
               </Link>
             </div>
