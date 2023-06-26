@@ -1,12 +1,8 @@
-import { Prism as SyntaxHighlighter } from 'prism-react-renderer';
 import Image from 'next/image';
 
 const components = {
   code({ node, inline, className, children, ...props }) {
-    const match = /language-(\w+)/.exec(className || '')
-    return !inline && match ? (
-      <SyntaxHighlighter language={match[1]} PreTag="div">{String(children).replace(/\n$/, '')}</SyntaxHighlighter>
-    ) : (
+    return (
       <code className={className} {...props}>
         {children}
       </code>
