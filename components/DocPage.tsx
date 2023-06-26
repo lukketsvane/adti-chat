@@ -77,7 +77,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     <div className="flex h-screen">
       {/* Sidebar */}
       <nav
-        className={`w-0 md:w-64 bg-white border-r overflow-auto ${
+        className={`w-0 md:w-64 bg-white border-r overflow-auto px-4 ${
           isSidebarOpen ? 'w-full' : ''
         } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
       >
