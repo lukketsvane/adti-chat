@@ -16,6 +16,8 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
     const file = doc.filePath.split('/').pop();
+    const displayTitle = file ? file.replace(/^\d+\.\d+ /, '') : '';
+
     return (
       <li
         key={doc.filePath}
@@ -25,7 +27,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
       >
         <Link href={doc.filePath} passHref>
           <span className={isSelected ? 'font-bold text-gray-800' : ''}>
-            {doc.data.title || file}
+            {displayTitle}
           </span>
         </Link>
       </li>
