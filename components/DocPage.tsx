@@ -72,52 +72,48 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     setIsSidebarOpen(false); // Close the sidebar when the route changes
   }, [router.asPath]);
 
-  const isMobile = window.innerWidth <= 768;
-
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      {!isMobile && (
-        <nav
-          className={`w-0 md:w-64 bg-white border-r overflow-auto px-4 ${
-            isSidebarOpen ? 'w-full' : ''
-          } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
-        >
-          <div className="md:hidden flex items-center justify-end py-2">
-            <button
-              className="text-gray-500 hover:text-gray-800 focus:outline-none"
-              onClick={toggleSidebar}
-            >
-              <FiMenu size={24} />
-            </button>
-          </div>
-          <div className={`md:block ${isSidebarOpen ? '' : 'hidden'}`}>
-            {sortedFolders.map((folder) => {
-              const folderTitle = folder.split('/').pop();
-              const displayFolderTitle = removeNumberPrefix(folderTitle);
-              return (
-                <div key={folder} className="user-select-none">
-                  <div
-                    className={`${
-                      selectedDoc.filePath.includes(folder)
-                        ? 'font-semibold text-gray-800 cursor-pointer'
-                        : 'text-gray-500 cursor-pointer'
-                    }`}
-                    onClick={() => handleFolderClick(folder)}
-                  >
-                    {displayFolderTitle}
-                  </div>
-                  {expandedFolders.includes(folder) && (
-                    <ul className="space-y-2 pl-2">
-                      {docsByFolder[folder].map((doc) => renderDocLink(doc, folder))}
-                    </ul>
-                  )}
+      <nav
+        className={`w-64 bg-white border-r overflow-auto px-4 md:relative md:w-auto md:overflow-visible md:border-0 ${
+          isSidebarOpen ? 'fixed inset-0 z-50' : 'hidden md:block'
+        }`}
+      >
+        <div className="md:hidden flex items-center justify-end py-2">
+          <button
+            className="text-gray-500 hover:text-gray-800 focus:outline-none"
+            onClick={toggleSidebar}
+          >
+            <FiMenu size={24} />
+          </button>
+        </div>
+        <div className={`${isSidebarOpen ? '' : 'hidden'}`}>
+          {sortedFolders.map((folder) => {
+            const folderTitle = folder.split('/').pop();
+            const displayFolderTitle = removeNumberPrefix(folderTitle);
+            return (
+              <div key={folder} className="user-select-none">
+                <div
+                  className={`${
+                    selectedDoc.filePath.includes(folder)
+                      ? 'font-semibold text-gray-800 cursor-pointer'
+                      : 'text-gray-500 cursor-pointer'
+                  }`}
+                  onClick={() => handleFolderClick(folder)}
+                >
+                  {displayFolderTitle}
                 </div>
-              );
-            })}
-          </div>
-        </nav>
-      )}
+                {expandedFolders.includes(folder) && (
+                  <ul className="space-y-2 pl-2">
+                    {docsByFolder[folder].map((doc) => renderDocLink(doc, folder))}
+                  </ul>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </nav>
       {/* Main Content */}
       <main className="flex-1 p-10 overflow-auto">
         <div className="prose max-w-none overflow-scroll">
