@@ -1,5 +1,5 @@
 // components/DocPage.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -13,6 +13,19 @@ type DocPageProps = {
 
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
@@ -62,36 +75,38 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
-        {sortedFolders.map((folder) => {
-          const folderTitle = folder.split('/').pop();
-          const displayFolderTitle = removeNumberPrefix(folderTitle);
-          return (
-            <div
-              key={folder}
-              className="transition-all duration-500 user-select-none"
-            >
+      {!isMobile && (
+        <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
+          {sortedFolders.map((folder) => {
+            const folderTitle = folder.split('/').pop();
+            const displayFolderTitle = removeNumberPrefix(folderTitle);
+            return (
               <div
-                className={`${
-                  selectedDoc.filePath.includes(folder)
-                    ? 'font-semibold text-gray-800 cursor-pointer'
-                    : 'text-gray-500 cursor-pointer'
-                }`}
-                onClick={() => handleFolderClick(folder)}
+                key={folder}
+                className="transition-all duration-500 user-select-none"
               >
-                {displayFolderTitle}
+                <div
+                  className={`${
+                    selectedDoc.filePath.includes(folder)
+                      ? 'font-semibold text-gray-800 cursor-pointer'
+                      : 'text-gray-500 cursor-pointer'
+                  }`}
+                  onClick={() => handleFolderClick(folder)}
+                >
+                  {displayFolderTitle}
+                </div>
+                {expandedFolders.includes(folder) && (
+                  <ul className="space-y-2 pl-2">
+                    {docsByFolder[folder].map((doc) =>
+                      renderDocLink(doc, folder)
+                    )}
+                  </ul>
+                )}
               </div>
-              {expandedFolders.includes(folder) && (
-                <ul className="space-y-2 pl-2">
-                  {docsByFolder[folder].map((doc) =>
-                    renderDocLink(doc, folder)
-                  )}
-                </ul>
-              )}
-            </div>
-          );
-        })}
-      </nav>
+            );
+          })}
+        </nav>
+      )}
       <main className="flex-1 p-10 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
           <ReactMarkdown components={markdownComponents} remarkPlugins={[gfm]}>
