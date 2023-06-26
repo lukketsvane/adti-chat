@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import Chat from '@/components/Chat';
-import DocPage from '@/components/DocPage'; // Import DocPage component
+import { DocPage } from '@/components/DocPage'; // Named import
 
 interface LayoutProps {
   children?: React.ReactNode;
