@@ -3,8 +3,8 @@ import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { solarizedlight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { Prism as SyntaxHighlighter } from 'prism-react-renderer';
+import { render } from 'react-dom';
 
 type DocPageProps = {
   docs: Doc[];
@@ -18,13 +18,14 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     code({node, inline, className, children, ...props}) {
       const match = /language-(\w+)/.exec(className || '')
       return !inline && match ? (
-        <SyntaxHighlighter style={solarizedlight} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+        <SyntaxHighlighter language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
       ) : (
         <code className={className} {...props}>
           {children}
         </code>
       )
-    }
+    },
+    h1: ({node, ...props}) => <h1 style={{fontSize: "2em"}} {...props} />,
   }
 
   const renderDocLink = (doc: Doc, folder: string) => {
