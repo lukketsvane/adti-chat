@@ -57,11 +57,16 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     return title.replace(/^\d+\.\d+ |^\d+ /, '');
   };
 
+  const isNumeric = (value: string): boolean => {
+    return /^\d+$/.test(value);
+  };
+
   return (
     <div className="flex h-screen overflow-hidden">
       <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
         {Object.keys(docsByFolder).map((folder) => {
           const folderTitle = folder.split('/').pop();
+          const displayFolderTitle = removeNumberPrefix(folderTitle);
           return (
             <div
               key={folder}
@@ -75,7 +80,11 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
                 }`}
                 onClick={() => handleFolderClick(folder)}
               >
-                {removeNumberPrefix(folderTitle)}
+                {isNumeric(displayFolderTitle) ? (
+                  <span className="sr-only">{displayFolderTitle}</span>
+                ) : (
+                  displayFolderTitle
+                )}
               </div>
               {expandedFolders.includes(folder) && (
                 <ul className="space-y-2 pl-2">
