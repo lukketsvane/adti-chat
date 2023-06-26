@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import Chat from '@/components/Chat';
+import DocPage from '@/components/DocPage'; // Import DocPage component
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -12,6 +13,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const [showChat, setShowChat] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>(''); // New state variable for search
   const router = useRouter();
 
   const toggleMobileMenu = () => {
@@ -50,7 +52,13 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <input type="search" placeholder="Search..." className="border-2 border-slate-300 rounded px-2" />
+              <input
+                type="search"
+                placeholder="Search..."
+                className="border-2 border-slate-300 rounded px-2"
+                value={searchQuery} // Set value to the searchQuery state variable
+                onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery on change
+              />
               <div className="md:hidden">
                 <button
                   className="text-gray-500 hover:text-gray-800 focus:outline-none"
@@ -63,7 +71,7 @@ export default function Layout({ children }: LayoutProps) {
                 className="border-2 border-slate-300 hover:border-slate-600 rounded-full px-2 hidden md:block"
                 onClick={toggleChat}
               >
-                {showChat ? 'Close Chat' : 'Open Chat'}
+                {showChat ? 'Chat' : 'Chat'}
               </button>
             </div>
           </nav>
@@ -88,7 +96,7 @@ export default function Layout({ children }: LayoutProps) {
                   }`}
                   onClick={closeMobileMenu}
                 >
-                  Chat
+                  GitHub
                 </span>
               </Link>
               <Link href="/page3" passHref>
@@ -108,7 +116,7 @@ export default function Layout({ children }: LayoutProps) {
       {showChat && <Chat onClose={toggleChat} />}
       <div>
         <main className="flex w-full flex-1 flex-col overflow-hidden">
-          {children}
+          <DocPage searchQuery={searchQuery} /> {/* Pass searchQuery as prop to DocPage */}
         </main>
       </div>
     </div>

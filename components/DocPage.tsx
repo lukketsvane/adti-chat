@@ -10,9 +10,10 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 type DocPageProps = {
   docs: Doc[];
   selectedDoc: Doc;
+  searchQuery: string; // New prop for search query
 };
 
-export function DocPage({ docs, selectedDoc }: DocPageProps) {
+export function DocPage({ docs, selectedDoc, searchQuery }: DocPageProps) {
   const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const router = useRouter();
@@ -35,7 +36,12 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     );
   };
 
-  const docsByFolder: Record<string, Doc[]> = docs.reduce((acc, doc) => {
+  // Filter docs based on search query before generating docsByFolder
+  const filteredDocs = docs.filter(doc =>
+    doc.data.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const docsByFolder: Record<string, Doc[]> = filteredDocs.reduce((acc, doc) => {
     const parts = doc.filePath.split('/');
     const folder = parts.slice(0, -1).join('/');
     acc[folder] = [...(acc[folder] || []), doc];
