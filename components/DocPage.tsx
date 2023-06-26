@@ -14,7 +14,9 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const renderers = {
     code: ({ language, value }: any) => {
       return (
-        <SyntaxHighlighter style={solarizedlight} language={language} children={value} />
+        <SyntaxHighlighter style={solarizedlight} language={language}>
+          {value}
+        </SyntaxHighlighter>
       );
     },
   };
@@ -35,7 +37,9 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         </ul>
       </nav>
       <main className="flex-1 p-10 overflow-y-auto">
-        <ReactMarkdown renderers={renderers} children={selectedDoc.content} />
+        <ReactMarkdown renderers={renderers}>
+          {selectedDoc.content}
+        </ReactMarkdown>
       </main>
     </div>
   );
