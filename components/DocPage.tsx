@@ -27,9 +27,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         } user-select-none`}
       >
         <Link href={doc.filePath} passHref>
-          <span className={isSelected ? 'font-bold text-gray-800' : ''}>
-            {displayTitle}
-          </span>
+          <a className={isSelected ? 'font-bold text-gray-800' : ''}>{displayTitle}</a>
         </Link>
       </li>
     );
@@ -118,13 +116,6 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           </ReactMarkdown>
         </div>
       </main>
-      {/* Mobile Menu Overlay */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden"
-          onClick={toggleSidebar}
-        ></div>
-      )}
     </div>
   );
 }
