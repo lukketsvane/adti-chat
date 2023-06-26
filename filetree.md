@@ -5,17 +5,24 @@ adti-chat
  ┃ ┃ ┣ LoadingDots.tsx
  ┃ ┃ ┗ TextArea.tsx
  ┃ ┣ Chat.tsx
+ ┃ ┣ DocPage.tsx
  ┃ ┣ FullPageIframe.tsx
  ┃ ┣ Home.tsx
  ┃ ┗ layout.tsx
  ┣ config
  ┃ ┗ pinecone.ts
+ ┣ lib
+ ┃ ┗ docs.ts
  ┣ declarations
  ┃ ┗ pdf-parse.d.ts
  ┣ pages
  ┃ ┣ api
  ┃ ┃ ┗ chat.ts
+ ┃ ┣ docs
+ ┃ ┣ ┣ index.tsx
+ ┃ ┃ ┗ [...slug].tsx
  ┃ ┣ index.tsx
+ ┃ ┣ login.tsx
  ┃ ┣ _app.tsx
  ┃ ┗ _document.tsx
  ┣ public

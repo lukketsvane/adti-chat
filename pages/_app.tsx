@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app';
 import { Inter } from 'next/font/google';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { DarkModeProvider } from './darkModeContext'; // Modify path as necessary
 
 const inter = Inter({
   variable: '--font-inter',
@@ -23,11 +24,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.pathname]);
 
   return (
-    <>
+    <DarkModeProvider>
       <main className={inter.variable}>
         <Component {...pageProps} />
       </main>
-    </>
+    </DarkModeProvider>
   );
 }
 
