@@ -1,4 +1,5 @@
 // components/DocPage.tsx
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Doc } from '@/lib/docs';
@@ -89,9 +90,11 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           </button>
         </div>
         <div className={`md:block ${isSidebarOpen ? '' : 'hidden'}`}>
-          {sortedFolders.map((folder) => {
+          {sortedFolders.map((folder, index) => {
             const folderTitle = folder.split('/').pop();
             const displayFolderTitle = removeNumberPrefix(folderTitle);
+            const isTopLevelFolder = folder.split('/').length === 1;
+
             return (
               <div key={folder} className="user-select-none">
                 <div
@@ -102,7 +105,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
                   }`}
                   onClick={() => handleFolderClick(folder)}
                 >
-                  {displayFolderTitle}
+                  {isTopLevelFolder ? `${index + 1}. ${displayFolderTitle}` : displayFolderTitle}
                 </div>
                 {expandedFolders.includes(folder) && (
                   <ul className="space-y-2 pl-2">
