@@ -1,0 +1,28 @@
+# Decision on Digital Twin Project Initiative, Fall 2023
+
+Tags: docs
+
+[Norsk: **Hand-out for avgjørelse om digital tvilling prosjekt høsten 2023** ](Decision%20on%20Digital%20Twin%20Project%20Initiative,%20Fall%20%207329ca8b01434cb0982bb27c5cdb66d7/Norsk%20Hand-out%20for%20avgj%C3%B8relse%20om%20digital%20tvilling%20%20958aeb7447b442cea8046769780b22b2.md)
+
+We need a better understanding of what digital twins in industrial digitization will mean, and the role ABB should play in this landscape. This is particularly important as several of our customers have announced their commitment to digital twins, setting requirements for our future deliveries that we currently do not fully comprehend. One of the biggest challenges we face is the lack of a common language, both in internal and external communication. As a result, we often use terms without a shared understanding, leading to miscommunication in discussions about digital twins. Alongside digital twins, we also need a better common understanding of concepts like artificial intelligence, machine learning, big data, the Internet of Things, and Industry 4.0.
+
+We believe the solution lies in allocating resources, time, and money to an exploration phase this fall, to gain knowledge about and form a basis for where ABB can position itself in the digital twin landscape. It is crucial to secure a position where both the customer and ABB see value and have a shared understanding of what is being offered. To explore this, we want to start by looking at a market, describe possible business cases and the necessary qualifications, and exemplify this by bringing forth the customer's understanding and wish for ABB's role. Ultimately, we aim to establish a shared understanding of what a digital twin in ABB means, and propose a potential digital twin pilot with a customer.
+
+The concept of a digital twin has been a significant buzzword for a while, and something that a modern company needs to consider. There are various interpretations of what a digital twin is, which should be systematized so we all discuss the same concept. Other concepts and technologies under the umbrella of a digital twin, such as large language models like GPT-4 and asset models like Asset Administration Shell, need to be explored further.
+
+Most of our major competitors are investing and partnering up to implement digital twins, and our customers are following suit, awarding projects to those involved in the digital twin wave, and seemingly profiting from it, like GE and Siemens. We also need to explore the landscape in terms of what our competitors and customers see as a digital twin.
+
+The power of visualization and having a digital representation was exemplified by the collaboration between ABB and Sumitomo. We set up a 3D model of a floating offshore substation for wind farms in a game environment and linked it to weather data, allowing for graphic changes in the model depending on the weather. This contributed to an early realization that the design as it was on the 2D drawing board would not work in practice, as the highest point on the platform was the oil tank on the transformer, which was highly susceptible to lightning strikes. This model was primarily a marketing stunt, but if more time was spent, one could imagine connecting this 3D model with other software that ABB has, to visualize real-time or simulated data in a new interface format, such as Alarm Insight.
+
+We believe the topic of "Digital Twins" and associated concepts are so important that we should establish a group to specifically look into this, hence we proposed an exploration phase this fall. It's critical to figure out how to create value and produce something that can be reused across multiple customers and segments. To achieve this, a team spanning several areas of expertise is required to encompass the complex issue. The proposed team consists of Linnea Espevik, Iver Finne, Håkon Berg, Thomas Havsberg, and John Pretlove. Additionally, support from several internal and possibly external experts will be required. It is proposed to use a total of 1210 hours over 8 weeks, with an internal price tag of around 1.5 to 2 MNOK.
+
+## References
+
+- Technology:
+- IBM: What is a digital twin: [https://www.ibm.com/topics/what-is-a-digital-twin](https://www.ibm.com/topics/what-is-a-digital-twin)
+- Digital twins, models and shadows: [https://www.wizata.com/knowledge-base/difference-between-digital-twin-digital-model-and-digital-shadow](https://www.wizata.com/knowledge-base/difference-between-digital-twin-digital-model-and-digital-shadow)
+- Asset Administration Shell – Digital representation of an asset, Industry 4.0 enabler og etterspurt av bla. Equinor. For en kort intro til AAS, se Plattform Industrie 4.0: [https://reference.opcfoundation.org/I4AAS/v100/docs/4.1](https://reference.opcfoundation.org/I4AAS/v100/docs/4.1)
+- GPT-4 and the future of digital twins: [https://ts2.space/en/chatgpt-4-and-the-future-of-digital-twins-ai-driven-virtual-models-and-simulations-for-industry/](https://ts2.space/en/chatgpt-4-and-the-future-of-digital-twins-ai-driven-virtual-models-and-simulations-for-industry/)
+- Konkurrenter
+- GE: [https://www.ge.com/digital/blog/industrial-digital-twins-real-products-driving-1b-loss-avoidance](https://www.ge.com/digital/blog/industrial-digital-twins-real-products-driving-1b-loss-avoidance)
+- Siemens: [https://www.siemens.com/us/en/company/topic-areas/advanced-manufacturing/digital-twin-in-advanced-manufacturing.html](https://www.siemens.com/us/en/company/topic-areas/advanced-manufacturing/digital-twin-in-advanced-manufacturing.html)
