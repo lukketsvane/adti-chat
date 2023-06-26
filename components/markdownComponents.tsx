@@ -19,7 +19,6 @@ const components = {
     <blockquote style={{ color: '#6a737d', borderLeft: '0.25em solid #dfe2e5', padding: '0 1em' }}>{children}</blockquote>
   ),
   hr: () => <hr />,
-  img: ({ src, alt }) => <img src={src} alt={alt} />,
 };
 
 export default components;
