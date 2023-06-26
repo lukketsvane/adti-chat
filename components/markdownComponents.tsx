@@ -8,12 +8,7 @@ const components = {
   em: (props) => <em {...props} />,
   strong: (props) => <strong {...props} />,
   del: (props) => <del {...props} />,
-  a: ({ href, ...props }) => {
-    if (href.match(/\.(jpeg|jpg|gif|png|svg)$/)) {
-      return <img src={href} style={{ maxWidth: '100%' }} />;
-    }
-    return <a href={href} style={{ color: 'grey', textDecoration: 'underline' }} {...props} />;
-  },
+  a: (props) => <a style={{ color: 'grey', textDecoration: 'underline' }} {...props} />,
   table: (props) => <table style={{ borderCollapse: 'collapse', width: '100%' }} {...props} />,
   thead: (props) => <thead {...props} />,
   tbody: (props) => <tbody {...props} />,
