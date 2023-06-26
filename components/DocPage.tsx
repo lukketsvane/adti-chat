@@ -56,28 +56,31 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   return (
     <div className="flex h-screen overflow-hidden">
       <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
-        {Object.keys(docsByFolder).map((folder) => (
-          <div
-            key={folder}
-            className="transition-all duration-500 user-select-none"
-          >
+        {Object.keys(docsByFolder).map((folder) => {
+          const folderTitle = folder.split('/').pop();
+          return (
             <div
-              className={`${
-                selectedDoc.filePath.includes(folder)
-                  ? 'font-semibold text-gray-800 cursor-pointer'
-                  : 'text-gray-500 cursor-pointer'
-              }`}
-              onClick={() => handleFolderClick(folder)}
+              key={folder}
+              className="transition-all duration-500 user-select-none"
             >
-              {folder.split('/').pop()}
+              <div
+                className={`${
+                  selectedDoc.filePath.includes(folder)
+                    ? 'font-semibold text-gray-800 cursor-pointer'
+                    : 'text-gray-500 cursor-pointer'
+                }`}
+                onClick={() => handleFolderClick(folder)}
+              >
+                {folderTitle}
+              </div>
+              {expandedFolders.includes(folder) && (
+                <ul className="space-y-2 pl-2">
+                  {docsByFolder[folder].map((doc) => renderDocLink(doc, folder))}
+                </ul>
+              )}
             </div>
-            {expandedFolders.includes(folder) && (
-              <ul className="space-y-2 pl-2">
-                {docsByFolder[folder].map((doc) => renderDocLink(doc, folder))}
-              </ul>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </nav>
       <main className="flex-1 p-10 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
