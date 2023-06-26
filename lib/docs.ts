@@ -12,7 +12,9 @@ export type Doc = {
 
 export function getDocBySlug(slug: string[]): Doc {
   const fullPath = path.join(docsDirectory, `${slug.join('/')}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const decodedPath = decodeURIComponent(fullPath); // Decode the URL-encoded path
+  const sanitizedPath = sanitizeFilePath(decodedPath); // Sanitize the file path
+  const fileContents = fs.readFileSync(sanitizedPath, 'utf8');
   const { data, content } = matter(fileContents);
 
   return { data, content, filePath: `/docs/${slug.join('/')}` };
@@ -23,10 +25,11 @@ export function getAllDocs(): Doc[] {
     const files = fs.readdirSync(dirPath);
 
     files.forEach((file) => {
-      if (fs.statSync(`${dirPath}/${file}`).isDirectory()) {
-        arrayOfFiles = getFiles(`${dirPath}/${file}`, arrayOfFiles);
+      const filePath = path.join(dirPath, file);
+      if (fs.statSync(filePath).isDirectory()) {
+        arrayOfFiles = getFiles(filePath, arrayOfFiles);
       } else {
-        arrayOfFiles.push(path.join(dirPath, '/', file));
+        arrayOfFiles.push(filePath);
       }
     });
 
@@ -45,4 +48,11 @@ export function getAllDocs(): Doc[] {
   });
 
   return docs;
+}
+
+function sanitizeFilePath(filePath: string): string {
+  // Remove special characters and spaces before the file extension
+  const sanitizedFileName = filePath.split('/').pop().replace(/[^\w.-]/g, '');
+  const sanitizedPath = filePath.replace(/\/[^/]+$/, `/${sanitizedFileName}`);
+  return sanitizedPath;
 }
