@@ -26,8 +26,8 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   }
 
   return (
-    <div className="flex">
-      <nav className="sticky top-0 h-screen w-64 overflow-auto border-r border-gray-200 p-4">
+    <div className="flex h-screen overflow-hidden">
+      <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
         <ul className="space-y-2">
           {docs.map((doc, idx) => (
             <li key={idx} className={doc === selectedDoc ? "font-semibold text-gray-800" : "text-gray-500"}>
@@ -40,10 +40,12 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           ))}
         </ul>
       </nav>
-      <main className="flex-1 p-10 overflow-y-auto">
-      <ReactMarkdown components={components} remarkPlugins={[gfm]}>
-  {selectedDoc.content}
-</ReactMarkdown>
+      <main className="flex-1 p-10 overflow-auto">
+        <div className="prose dark:prose-dark max-w-none overflow-scroll">
+          <ReactMarkdown components={components} remarkPlugins={[gfm]}>
+            {selectedDoc.content}
+          </ReactMarkdown>
+        </div>
       </main>
     </div>
   );
