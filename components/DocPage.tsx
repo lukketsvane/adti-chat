@@ -3,7 +3,7 @@ import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 type DocPageProps = {
@@ -41,7 +41,9 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         </ul>
       </nav>
       <main className="flex-1 p-10 overflow-y-auto">
-        <ReactMarkdown components={components} remarkPlugins={[gfm]} children={selectedDoc.content} />
+      <ReactMarkdown components={components} remarkPlugins={[gfm]}>
+  {selectedDoc.content}
+</ReactMarkdown>
       </main>
     </div>
   );
