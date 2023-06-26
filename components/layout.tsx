@@ -63,7 +63,7 @@ export default function Layout({ children }: LayoutProps) {
                 className="border-2 border-slate-300 hover:border-slate-600 rounded-full px-2 hidden md:block"
                 onClick={toggleChat}
               >
-                {showChat ? 'Hide Chat' : 'Chat'}
+                {showChat ? 'Chat' : 'Chat'}
               </button>
             </div>
           </nav>
@@ -106,7 +106,6 @@ export default function Layout({ children }: LayoutProps) {
         )}
       </header>
       {showChat && <Chat onClose={toggleChat} />}
-
       <div>
         <main className="flex w-full flex-1 flex-col overflow-hidden">
           {children}
