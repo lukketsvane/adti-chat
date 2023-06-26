@@ -9,7 +9,7 @@ const components = {
   strong: (props) => <strong {...props} />,
   del: (props) => <del {...props} />,
   a: (props) => <a style={{ color: 'grey', textDecoration: 'underline' }} {...props} />,
-  table: (props) => <table style={{ borderCollapse: 'collapse', width: '100%' }} {...props} />,
+  table: (props) => <table style={{ borderCollapse: 'collapse', width: '80%' }} {...props} />,
   thead: (props) => <thead {...props} />,
   tbody: (props) => <tbody {...props} />,
   tr: (props) => <tr {...props} />,
