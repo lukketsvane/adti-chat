@@ -22,6 +22,10 @@ export default function Layout({ children }: LayoutProps) {
     setIsMobileMenuOpen(false);
   };
 
+  const toggleChat = () => {
+    setShowChat(!showChat);
+  };
+
   return (
     <div className="mx-auto flex flex-col space-y-4">
       <header className="sticky top-0 z-40 bg-white">
@@ -55,6 +59,12 @@ export default function Layout({ children }: LayoutProps) {
                   <FiMenu size={24} />
                 </button>
               </div>
+              <button
+                className="border-2 border-slate-300 hover:border-slate-600 rounded-full px-2 hidden md:block"
+                onClick={toggleChat}
+              >
+                {showChat ? 'Hide Chat' : 'Chat'}
+              </button>
             </div>
           </nav>
         </div>
