@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { useRouter } from 'next/router';
-import Chat from '@/components/Chat-window';
+import Chat from '@/components/Chat';
 
 interface LayoutProps {
   children?: React.ReactNode;
