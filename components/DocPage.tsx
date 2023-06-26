@@ -2,7 +2,8 @@
 import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import gfm from 'remark-gfm';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 type DocPageProps = {
@@ -11,15 +12,18 @@ type DocPageProps = {
 };
 
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
-  const renderers = {
-    code: ({ language, value }: any) => {
-      return (
-        <SyntaxHighlighter style={solarizedlight} language={language}>
-          {value}
-        </SyntaxHighlighter>
-      );
-    },
-  };
+  const components = {
+    code({node, inline, className, children, ...props}) {
+      const match = /language-(\w+)/.exec(className || '')
+      return !inline && match ? (
+        <SyntaxHighlighter style={solarizedlight} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+      ) : (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      )
+    }
+  }
 
   return (
     <div className="flex">
@@ -37,9 +41,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         </ul>
       </nav>
       <main className="flex-1 p-10 overflow-y-auto">
-        <ReactMarkdown renderers={renderers}>
-          {selectedDoc.content}
-        </ReactMarkdown>
+        <ReactMarkdown components={components} remarkPlugins={[gfm]} children={selectedDoc.content} />
       </main>
     </div>
   );
