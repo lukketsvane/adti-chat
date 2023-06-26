@@ -1,3 +1,4 @@
+// [...slug].tsx
 import { GetServerSidePropsContext, GetServerSideProps } from 'next';
 import { getAllDocs, getDocBySlug, Doc } from '@/lib/docs';
 import { DocPage } from '@/components/DocPage';
