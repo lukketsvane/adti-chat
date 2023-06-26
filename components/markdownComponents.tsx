@@ -11,8 +11,6 @@ const components = {
   strong: (props) => <strong {...props} />,
   del: (props) => <del {...props} />,
   a: (props) => <a style={{ color: 'grey', textDecoration: 'underline' }} {...props} />,
-  p: (props) => <p {...props} />,
-  img: ({ src, alt }) => <Image src={src} alt={alt} layout="responsive" maxWidth="100%" />,
   table: (props) => <table style={{ borderCollapse: 'collapse', width: '100%' }} {...props} />,
   thead: (props) => <thead {...props} />,
   tbody: (props) => <tbody {...props} />,
@@ -23,6 +21,7 @@ const components = {
     <blockquote style={{ color: '#6a737d', borderLeft: '0.25em solid #dfe2e5', padding: '0 1em' }}>{children}</blockquote>
   ),
   hr: () => <hr />,
+  img: ({ src, alt }) => <Image src={src} alt={alt} layout="responsive" className="max-w-full" />,
 };
 
 export default components;
