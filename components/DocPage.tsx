@@ -67,9 +67,9 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
       <nav
-        className={`w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4 ${
-          isSidebarOpen ? 'transform translate-x-0' : 'transform -translate-x-full'
-        } md:relative md:translate-x-0 md:static md:w-auto md:overflow-visible md:border-0 transition-transform duration-300 ease-in-out`}
+        className={`w-0 md:w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4 ${
+          isSidebarOpen ? 'w-64' : ''
+        } md:relative md:w-auto md:overflow-visible md:border-0 transition-width duration-300 ease-in-out`}
       >
         <div className="md:hidden flex items-center justify-end py-2">
           <button
@@ -111,7 +111,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         </div>
       </nav>
       {/* Main Content */}
-      <main className="flex-1 p-10 overflow-auto w-full">
+      <main className="flex-1 p-10 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
           <ReactMarkdown components={markdownComponents} remarkPlugins={[gfm]}>
             {selectedDoc.content}
