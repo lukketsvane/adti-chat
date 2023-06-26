@@ -10,19 +10,25 @@ type DocPageProps = {
   selectedDoc: Doc;
 };
 
+type FolderNode = {
+  folder: string;
+  nestedFolders: FolderNode[];
+  docs: Doc[];
+};
+
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
   const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
 
-  const renderDocLink = (doc: Doc, folder: string) => {
+  const renderDocLink = (doc: Doc) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
-    const displayTitle = removeNumberPrefix(doc.data.title || doc.filePath.split('/').pop());
+    const displayTitle = removeNumberPrefix(doc.data.title || doc.filePath.split('/').pop() || '');
 
     return (
       <li
         key={doc.filePath}
         className={`${
           isSelected ? 'font-semibold text-gray-800' : 'text-gray-500'
-        } user-select-none`}
+        } user-select-none pl-4`}
       >
         <Link href={doc.filePath} passHref>
           <span className={isSelected ? 'font-bold text-gray-800' : ''}>
@@ -33,12 +39,39 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     );
   };
 
-  const docsByFolder: Record<string, Doc[]> = docs.reduce((acc, doc) => {
-    const parts = doc.filePath.split('/');
-    const folder = parts.slice(0, -1).join('/');
-    acc[folder] = [...(acc[folder] || []), doc];
-    return acc;
-  }, {});
+  const generateFolderTree = (folders: string[], allDocs: Doc[]): FolderNode => {
+    const root: FolderNode = {
+      folder: '',
+      nestedFolders: [],
+      docs: [],
+    };
+
+    const addToFolder = (folderNode: FolderNode, filePathParts: string[], doc: Doc) => {
+      const [folder, ...remainingParts] = filePathParts;
+
+      if (folder) {
+        let nestedFolder = folderNode.nestedFolders.find((f) => f.folder === folder);
+        if (!nestedFolder) {
+          nestedFolder = {
+            folder,
+            nestedFolders: [],
+            docs: [],
+          };
+          folderNode.nestedFolders.push(nestedFolder);
+        }
+        addToFolder(nestedFolder, remainingParts, doc);
+      } else {
+        folderNode.docs.push(doc);
+      }
+    };
+
+    for (const doc of allDocs) {
+      const filePathParts = doc.filePath.split('/');
+      addToFolder(root, filePathParts, doc);
+    }
+
+    return root;
+  };
 
   const handleFolderClick = (folder: string) => {
     const newExpandedFolders = [...expandedFolders];
@@ -52,77 +85,41 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   const removeNumberPrefix = (title: string): string => {
-    return title.replace(/^\d+(\.\d+)? /, '');
+    return title.replace(/^\d+\.\d+ |^\d+ /, '');
   };
 
-  const sortFoldersAndDocs = (folders: string[], docs: Doc[]): (string | Doc)[] => {
-    const sortedFolders = folders.sort((a, b) => {
-      const aTitle = removeNumberPrefix(a.split('/').pop() || '');
-      const bTitle = removeNumberPrefix(b.split('/').pop() || '');
-      return aTitle.localeCompare(bTitle);
-    });
-    const sortedDocs = docs.sort((a, b) => {
-      const aTitle = removeNumberPrefix(a.data.title || a.filePath.split('/').pop() || '');
-      const bTitle = removeNumberPrefix(b.data.title || b.filePath.split('/').pop() || '');
-      return aTitle.localeCompare(bTitle);
-    });
-    return [...sortedFolders, ...sortedDocs];
-  };
+  const rootFolder = generateFolderTree(Object.keys(docs), docs);
 
-  const sortedFoldersAndDocs = sortFoldersAndDocs(Object.keys(docsByFolder), docs);
+  const renderFolderNode = (folderNode: FolderNode) => {
+    const { folder, nestedFolders, docs } = folderNode;
+    const displayFolderTitle = removeNumberPrefix(folder.split('/').pop() || '');
+
+    return (
+      <div key={folder}>
+        <div
+          className={`${
+            expandedFolders.includes(folder)
+              ? 'font-semibold text-gray-800 cursor-pointer'
+              : 'text-gray-500 cursor-pointer'
+          }`}
+          onClick={() => handleFolderClick(folder)}
+        >
+          {displayFolderTitle}
+        </div>
+        {expandedFolders.includes(folder) && (
+          <ul className="space-y-2 pl-2">
+            {nestedFolders.map((nestedFolder) => renderFolderNode(nestedFolder))}
+            {docs.map((doc) => renderDocLink(doc))}
+          </ul>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="flex h-screen overflow-hidden">
       <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
-        <ul className="space-y-2">
-          {sortedFoldersAndDocs.map((item) => {
-            if (typeof item === 'string') {
-              const folder = item;
-              const folderTitle = folder.split('/').pop();
-              const displayFolderTitle = removeNumberPrefix(folderTitle || '');
-              return (
-                <div
-                  key={folder}
-                  className="transition-all duration-500 user-select-none"
-                >
-                  <div
-                    className={`${
-                      expandedFolders.includes(folder)
-                        ? 'font-semibold text-gray-800 cursor-pointer'
-                        : 'text-gray-500 cursor-pointer'
-                    }`}
-                    onClick={() => handleFolderClick(folder)}
-                  >
-                    {displayFolderTitle}
-                  </div>
-                  {expandedFolders.includes(folder) && (
-                    <ul className="space-y-2 pl-2">
-                      {docsByFolder[folder].map((doc) => renderDocLink(doc, folder))}
-                    </ul>
-                  )}
-                </div>
-              );
-            } else {
-              const doc = item;
-              const isSelected = doc.filePath === selectedDoc.filePath;
-              const displayTitle = removeNumberPrefix(doc.data.title || doc.filePath.split('/').pop() || '');
-              return (
-                <li
-                  key={doc.filePath}
-                  className={`${
-                    isSelected ? 'font-semibold text-gray-800' : 'text-gray-500'
-                  } user-select-none pl-4`}
-                >
-                  <Link href={doc.filePath} passHref>
-                    <span className={isSelected ? 'font-bold text-gray-800' : ''}>
-                      {displayTitle}
-                    </span>
-                  </Link>
-                </li>
-              );
-            }
-          })}
-        </ul>
+        {renderFolderNode(rootFolder)}
       </nav>
       <main className="flex-1 p-10 overflow-auto">
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
