@@ -54,7 +54,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
   };
 
   const removeNumberPrefix = (title: string): string => {
-    return title.replace(/^\d+\.\d+ /, '');
+    return title.replace(/^\d+\.\d+ |^\d+ /, '');
   };
 
   return (
