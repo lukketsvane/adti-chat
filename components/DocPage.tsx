@@ -111,7 +111,11 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         </div>
       </nav>
       {/* Main Content */}
-      <main className={`flex-1 p-10 overflow-auto ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
+      <main
+        className={`flex-1 p-10 overflow-auto ${
+          isSidebarOpen ? 'hidden md:block' : ''
+        }`}
+      >
         <div className="prose dark:prose-dark max-w-none overflow-scroll">
           <ReactMarkdown
             components={markdownComponents}
